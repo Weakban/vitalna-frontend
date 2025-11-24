@@ -1,7 +1,6 @@
 import { emailOnlySchema, loginSchema, TokenConfirmSchema } from "@/types";
 import api from "./axios";
 import { isAxiosError } from "axios";
-import { useAuthStore } from "../store/auth";
 type UserData = {
   [k: string]: FormDataEntryValue;
 };
