@@ -19,7 +19,7 @@ import {
   FiTwitter,
 } from "react-icons/fi";
 
-import Vblue from "../assets/Vblue.svg";
+import Vblue from "../assets/VBlue.svg";
 import { ColorModeButton } from "./ui/color-mode";
 
 const NAV_ITEMS = [
