@@ -8,7 +8,7 @@ import { toaster } from "@/components/ui/toaster";
 import { confirmAccount } from "@/api/AuthAPI";
 import { PinInput } from "@chakra-ui/react";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolVers/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
   token: z

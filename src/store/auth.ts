@@ -19,22 +19,22 @@ const storeAPI: StateCreator<State & Actions> = (set) => ({
   isAuth: false,
 
   setToken: (value: string) =>
-    set((state) => ({
+    set(() => ({
       token: value,
     })),
 
   setProfile: (value: any) =>
-    set((state) => ({
+    set(() => ({
       profile: value,
     })),
 
   setIsAuth: () =>
-    set((state) => ({
+    set(() => ({
       isAuth: true,
     })),
 
   logout: () => {
-    set((state) => ({
+    set(() => ({
       token: "",
       isAuth: false,
       profile: "",

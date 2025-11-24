@@ -2,9 +2,7 @@ import { Box, Text, Card, Button, Heading, Flex } from "@chakra-ui/react";
 import {
   Form,
   redirect,
-  useActionData,
   useFetcher,
-  useNavigate,
   type ActionFunctionArgs,
 } from "react-router-dom";
 import LoginForm from "@/components/Auth/LoginForm";

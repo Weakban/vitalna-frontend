@@ -12,9 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-// Hero image
-import HeroImage from "../assets/HomeSVGS/Salud_RectangleCorazonTech.svg";
-
 // Salud images
 import MedicinaFamiliar from "../assets/HomeSVGS/Salud_MedicinaFamiliar.svg";
 import MedicinaTecnologica from "../assets/HomeSVGS/Salud_MedicinaTecnologica.svg";
