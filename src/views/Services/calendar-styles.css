@@ -1,0 +1,112 @@
+/* Estilos personalizados para el calendario */
+.vitalna-calendar {
+  width: 100% !important;
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  font-family: inherit !important;
+}
+
+.vitalna-calendar .react-calendar__navigation {
+  margin-bottom: 16px !important;
+}
+
+.vitalna-calendar .react-calendar__navigation button {
+  min-width: 44px !important;
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 6px !important;
+  color: #4a5568 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 8px !important;
+}
+
+.vitalna-calendar .react-calendar__navigation button:hover {
+  background-color: #f7fafc !important;
+}
+
+/* Grid del mes - 7 columnas para los 7 días de la semana */
+.vitalna-calendar .react-calendar__month-view__weekdays {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 2px !important;
+}
+
+.vitalna-calendar .react-calendar__month-view__weekdays__weekday {
+  text-align: center !important;
+  padding: 8px !important;
+  font-weight: bold !important;
+  color: #4a5568 !important;
+  font-size: 12px !important;
+}
+
+.vitalna-calendar .react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 2px !important;
+}
+
+.vitalna-calendar .react-calendar__tile {
+  padding: 12px 8px !important;
+  background: none !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+  margin: 2px !important;
+  transition: all 0.2s ease !important;
+}
+
+.vitalna-calendar .react-calendar__tile:hover:not(:disabled) {
+  background-color: #e6fffa !important;
+  border-color: #319795 !important;
+  transform: scale(1.05) !important;
+}
+
+.vitalna-calendar .react-calendar__tile--active {
+  background-color: #805ad5 !important;
+  color: white !important;
+  font-weight: bold !important;
+  border-color: #6b46c1 !important;
+  box-shadow: 0 0 0 2px #6b46c1 !important;
+}
+
+.vitalna-calendar .react-calendar__tile--active:hover {
+  background-color: #6b46c1 !important;
+  box-shadow: 0 0 0 2px #553c9a !important;
+}
+
+.vitalna-calendar .react-calendar__tile--active:focus {
+  background-color: #805ad5 !important;
+  color: white !important;
+  box-shadow: 0 0 0 2px #6b46c1 !important;
+}
+
+.vitalna-calendar .react-calendar__tile--now {
+  background-color: #fed7d7 !important;
+  color: #c53030 !important;
+  font-weight: bold !important;
+  border-color: #fc8181 !important;
+}
+
+.vitalna-calendar .react-calendar__tile--now.react-calendar__tile--active {
+  background-color: #805ad5 !important;
+  color: white !important;
+  border-color: #6b46c1 !important;
+}
+
+.vitalna-calendar .react-calendar__tile:disabled {
+  background-color: #f7fafc !important;
+  color: #a0aec0 !important;
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+.vitalna-calendar .react-calendar__tile:disabled:hover {
+  background-color: #f7fafc !important;
+  transform: none !important;
+  border-color: transparent !important;
+}
