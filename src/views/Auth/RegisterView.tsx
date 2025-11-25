@@ -72,20 +72,34 @@ export default function RegisterView() {
         py={{ base: 8, md: 12 }}
       >
         <Card.Root w="full" maxW="520px" shadow="lg" rounded="2xl">
-          <Flex justify="space-between" gap="4" paddingX={2}>
-            <Button size="xs" variant="outline">
+          <Flex
+            justify="space-between"
+            gap="4"
+            px={{ base: 3, md: 4 }}
+            pt={{ base: 3, md: 4 }}
+          >
+            <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
               <a href="/">Página principal</a>
             </Button>
 
-            <Button size="xs" variant="outline">
+            <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
               <a href="/">Ayuda</a>
             </Button>
           </Flex>
-          <Card.Header justifyContent="center" alignItems="center">
-            <Heading size="lg" color="brand.ink">
+          <Card.Header
+            justifyContent="center"
+            alignItems="center"
+            px={{ base: 4, md: 6 }}
+          >
+            <Heading size={{ base: "md", md: "lg" }} color="brand.ink">
               Crea tu cuenta
             </Heading>
-            <Text mt={1} color="blackAlpha.700" fontSize="sm">
+            <Text
+              mt={1}
+              color="blackAlpha.700"
+              fontSize={{ base: "xs", md: "sm" }}
+              textAlign="center"
+            >
               Únete a Vitalná para reservar/ofrecer servicios de bienestar y
               belleza.
             </Text>
@@ -106,40 +120,42 @@ export default function RegisterView() {
             </Card.Body>
 
             <Card.Footer
-              justifyContent="center"
-              alignContent="center"
-              alignItems="center"
-              justifyItems="center"
+              flexDirection="column"
+              gap={{ base: 3, md: 4 }}
+              px={{ base: 4, md: 6 }}
+              py={{ base: 6, md: 8 }}
             >
-              <Text fontSize="sm" color="blackAlpha.700" textAlign="center">
-                ¿Ya tienes cuenta?{" "}
-              </Text>
-              <Button
-                size="lg"
-                bg="brand.Cblue"
-                color="white"
-                _hover={{ opacity: 0.9, bg: "brand.Cmint" }}
-                onClick={() =>
-                  toaster.create({
-                    description: "Toast",
-                    type: "info",
-                  })
-                }
+              <Text
+                fontSize="sm"
+                color="blackAlpha.700"
+                textAlign="center"
+                mt={2}
               >
-                <a href="/auth/login">Iniciar Sesión</a>
-              </Button>
-              <Text fontSize="sm" color="blackAlpha.700" textAlign="center">
                 Llena el formulario para:{" "}
               </Text>
               <Button
                 type="submit"
-                size="lg"
+                size={{ base: "md", md: "lg" }}
+                w="full"
                 bg="brand.Cblue"
                 color="white"
                 _hover={{ bg: "brand.Cmint" }}
                 loadingText="Creando..."
               >
                 Crear cuenta
+              </Button>
+              <Text fontSize="sm" color="blackAlpha.700" textAlign="center">
+                ¿Ya tienes cuenta?{" "}
+              </Text>
+              <Button
+                asChild
+                size={{ base: "md", md: "lg" }}
+                w="full"
+                bg="brand.Cblue"
+                color="white"
+                _hover={{ opacity: 0.9, bg: "brand.Cmint" }}
+              >
+                <a href="/auth/login">Iniciar Sesión</a>
               </Button>
             </Card.Footer>
           </Form>

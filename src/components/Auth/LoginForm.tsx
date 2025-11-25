@@ -11,31 +11,43 @@ type LoginFormProps = {
 
 export default function LoginForm({ errors, register }: LoginFormProps) {
   return (
-    <Stack gap="4" align="flex-start" maxW="sm">
-      <Field.Root invalid={!!errors.email}>
-        <Field.Label>Correo electrónico</Field.Label>
+    <Stack
+      gap="5"
+      align="flex-start"
+      w="full"
+      maxW={{ base: "full", sm: "sm" }}
+    >
+      <Field.Root invalid={!!errors.email} w="full">
+        <Field.Label fontWeight="medium" mb={2}>
+          Correo electrónico
+        </Field.Label>
         <Input
           id="email"
           data-testid="email-input"
-          placeholder="Introduce tu correo electrónico "
+          type="email"
+          placeholder="ejemplo@correo.com"
+          size="lg"
           {...register("email", {
             required: "El correo electrónico es obligatorio",
           })}
         />
-        <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
+        <Field.ErrorText mt={1.5}>{errors.email?.message}</Field.ErrorText>
       </Field.Root>
 
-      <Field.Root invalid={!!errors.password}>
-        <Field.Label>Contraseña</Field.Label>
+      <Field.Root invalid={!!errors.password} w="full">
+        <Field.Label fontWeight="medium" mb={2}>
+          Contraseña
+        </Field.Label>
         <PasswordInput
           id="password"
           data-testid="password-input"
-          placeholder="Introduce la contraseña"
+          placeholder="Tu contraseña"
+          size="lg"
           {...register("password", {
             required: "La contraseña es obligatoria",
           })}
         />
-        <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
+        <Field.ErrorText mt={1.5}>{errors.password?.message}</Field.ErrorText>
       </Field.Root>
     </Stack>
   );

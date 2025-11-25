@@ -28,7 +28,12 @@ export default function RegisterForm({
   const role = useWatch({ control, name: "role" });
 
   return (
-    <Stack gap="4" align="flex-start" maxW="sm">
+    <Stack
+      gap="4"
+      align="flex-start"
+      w="full"
+      maxW={{ base: "full", sm: "sm" }}
+    >
       <Controller
         control={control}
         name="role"
@@ -106,7 +111,12 @@ export default function RegisterForm({
       {/* Fragmento para CLIENT */}
 
       {role === "CLIENT" && (
-        <Stack gap="4" align="flex-start" maxW="sm">
+        <Stack
+          gap="4"
+          align="flex-start"
+          w="full"
+          maxW={{ base: "full", sm: "sm" }}
+        >
           <Field.Root invalid={!!errors.phone}>
             <Field.Label>Número de teléfono</Field.Label>
             <Input
@@ -123,7 +133,7 @@ export default function RegisterForm({
             <Field.Label>Genero</Field.Label>
             <Input
               id="gender"
-              placeholder="introduce tu numero telefónico "
+              placeholder="Especifica tu genero "
               {...register("gender", {
                 required: "La especialidad es obligatoria",
               })}
@@ -146,7 +156,12 @@ export default function RegisterForm({
       )}
 
       {role === "PROFESSIONAL" && (
-        <Stack gap="4" align="flex-start" maxW="sm">
+        <Stack
+          gap="4"
+          align="flex-start"
+          w="full"
+          maxW={{ base: "full", sm: "sm" }}
+        >
           <Field.Root invalid={!!errors.phone}>
             <Field.Label>Número de teléfono</Field.Label>
             <Input
@@ -187,71 +202,3 @@ export default function RegisterForm({
     </Stack>
   );
 }
-
-/**import type { FieldErrors, UseFormRegister } from "react-hook-form";
-import ErrorMessage from "../ErrorMessage";
-import type { RegisterFormData } from "@/types";
-
-type RegisterFormProps = {
-  register: UseFormRegister<RegisterFormData>;
-  errors: FieldErrors<RegisterFormData>;
-};
-
-export default function RegisterForm({ errors, register }: RegisterFormProps) {
-  return (
-    <>
-      <div className="mb-5 space-y-3">
-        <label htmlFor="name" className="text-sm uppercase font-bold">
-          Nombre
-        </label>
-        <input
-          id="name"
-          className="w-full p-3  border border-gray-200"
-          type="text"
-          placeholder="Nombre del Proyecto"
-          {...register("name", {
-            required: "El nombre es obligatorio",
-          })}
-        />
-
-        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-      </div>
-
-      <div className="mb-5 space-y-3">
-        <label htmlFor="email" className="text-sm uppercase font-bold">
-          Nombre Cliente
-        </label>
-        <input
-          id="email"
-          className="w-full p-3  border border-gray-200"
-          type="text"
-          placeholder="Nombre del Cliente"
-          {...register("email", {
-            required: "El Nombre del Cliente es obligatorio",
-          })}
-        />
-
-        {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-      </div>
-
-      <div className="mb-5 space-y-3">
-        <label htmlFor="password" className="text-sm uppercase font-bold">
-          Descripción
-        </label>
-        <textarea
-          id="password"
-          className="w-full p-3  border border-gray-200"
-          placeholder="Descripción del Proyecto"
-          {...register("password", {
-            required: "Una descripción del proyecto es obligatoria",
-          })}
-        />
-
-        {errors.password && (
-          <ErrorMessage>{errors.password.message}</ErrorMessage>
-        )}
-      </div>
-    </>
-  );
-}
- */

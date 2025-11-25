@@ -86,13 +86,44 @@ export default function LoginView() {
         px={4}
         py={{ base: 8, md: 12 }}
       >
-        <Card.Root w="full" maxW="520px" shadow="lg" rounded="2xl">
-          <Card.Header justifyContent="center" alignItems="center">
-            <Heading size="lg" color="brand.ink">
+        <Card.Root w="full" maxW="540px" shadow="2xl" rounded="3xl">
+          <Flex
+            justify="space-between"
+            gap="4"
+            px={{ base: 4, md: 6 }}
+            pt={{ base: 4, md: 5 }}
+          >
+            <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
+              <a href="/">Página principal</a>
+            </Button>
+
+            <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
+              <a href="/">Ayuda</a>
+            </Button>
+          </Flex>
+          <Card.Header
+            justifyContent="center"
+            alignItems="center"
+            px={{ base: 4, md: 6 }}
+            pt={{ base: 4, md: 6 }}
+            pb={{ base: 2, md: 3 }}
+          >
+            <Heading
+              size={{ base: "lg", md: "xl" }}
+              color="brand.ink"
+              fontWeight="bold"
+              letterSpacing="tight"
+            >
               Inicia sesión
             </Heading>
-            <Text mt={1} color="blackAlpha.700" fontSize="sm">
-              Inicia sesión para reservar servicios de bienestar y belleza.
+            <Text
+              mt={2}
+              color="blackAlpha.700"
+              fontSize={{ base: "sm", md: "md" }}
+              textAlign="center"
+              lineHeight="tall"
+            >
+              Accede a tu cuenta de Vitalná
             </Text>
           </Card.Header>
           {/**cuando agregamos el onSubmit ya no funciona el action */}
@@ -102,48 +133,50 @@ export default function LoginView() {
             onSubmit={handleSubmit(handleForm)}
             noValidate
           >
-            <Card.Body>
+            <Card.Body px={{ base: 4, md: 6 }} py={{ base: 6, md: 8 }}>
               <LoginForm register={register} errors={errors} />
             </Card.Body>
             <Card.Footer
-              justifyContent="center"
-              alignContent="center"
-              alignItems="center"
-              justifyItems="center"
+              flexDirection="column"
+              gap={{ base: 4, md: 5 }}
+              px={{ base: 4, md: 6 }}
+              py={{ base: 6, md: 8 }}
             >
-              <Text fontSize="sm" color="blackAlpha.700" textAlign="center">
-                ¿Todavía no tienes una cuenta?
-              </Text>
-              <Button
-                size="lg"
-                bg="brand.Cblue"
-                color="white"
-                _hover={{ bg: "brand.Cmint" }}
-                loadingText="Creando..."
-              >
-                <a href="/auth/register">Crear cuenta</a>
-              </Button>
-
               <Button
                 type="submit"
-                size="lg"
+                size={{ base: "lg", md: "xl" }}
+                w="full"
                 bg="brand.Cblue"
                 color="white"
-                _hover={{ opacity: 0.9, bg: "brand.Cmint" }}
+                fontWeight="semibold"
+                _hover={{
+                  bg: "brand.Cmint",
+                  transform: "translateY(-1px)",
+                  shadow: "md",
+                }}
+                transition="all 0.2s"
               >
                 Iniciar sesión
               </Button>
+
+              <Box textAlign="center">
+                <Text fontSize="sm" color="blackAlpha.700" display="inline">
+                  ¿Todavía no tienes cuenta?{" "}
+                </Text>
+                <Button
+                  asChild
+                  variant="plain"
+                  size="sm"
+                  color="brand.Cblue"
+                  fontWeight="semibold"
+                  _hover={{ textDecoration: "underline" }}
+                  px={1}
+                >
+                  <a href="/auth/register">Crear una</a>
+                </Button>
+              </Box>
             </Card.Footer>
           </Form>
-          <Flex justify="space-between" gap="4" paddingX={2}>
-            <Button size="xs" variant="outline">
-              <a href="/">Página principal</a>
-            </Button>
-
-            <Button size="xs" variant="outline">
-              <a href="/">Ayuda</a>
-            </Button>
-          </Flex>
         </Card.Root>
       </Box>
     </>
