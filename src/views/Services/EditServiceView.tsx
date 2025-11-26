@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Box, Button, Card, Heading, Link, Text } from "@chakra-ui/react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { type Service, type serviceFormData } from "@/types";
 import bgServices from "../../assets/bgServices.jpg";
 import {
@@ -71,6 +72,9 @@ export default function EditServiceView() {
     isActive: service?.isActive ?? true,
   };
 
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("blackAlpha.700", "gray.300");
+
   const {
     register,
     handleSubmit,
@@ -97,10 +101,10 @@ export default function EditServiceView() {
       >
         <Card.Root w="full" maxW="520px" shadow="lg" rounded="2xl">
           <Card.Header justifyContent="center" alignItems="center">
-            <Heading size="lg" color="brand.ink">
+            <Heading size="lg" color={headingColor}>
               Editar servicio
             </Heading>
-            <Text mt={1} color="blackAlpha.700" fontSize="sm">
+            <Text mt={1} color={textColor} fontSize="sm">
               Edita el servicio
             </Text>
           </Card.Header>

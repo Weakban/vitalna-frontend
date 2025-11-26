@@ -32,7 +32,7 @@ export default function RegisterForm({
       gap="4"
       align="flex-start"
       w="full"
-      maxW={{ base: "full", sm: "sm" }}
+      // maxW={{ base: "full", sm: "sm" }}
     >
       <Controller
         control={control}
@@ -115,7 +115,7 @@ export default function RegisterForm({
           gap="4"
           align="flex-start"
           w="full"
-          maxW={{ base: "full", sm: "sm" }}
+          //maxW={{ base: "full", sm: "sm" }}
         >
           <Field.Root invalid={!!errors.phone}>
             <Field.Label>Número de teléfono</Field.Label>
@@ -146,8 +146,9 @@ export default function RegisterForm({
             <Input
               id="birthDate"
               type="date"
+              placeholder="Especifica tu fecha de nacimiento "
               {...register("birthDate", {
-                required: "La biografía es obligatoria",
+                required: "Tu fecha de nacimiento es obligatoria",
               })}
             />
             <Field.ErrorText>{errors.birthDate?.message}</Field.ErrorText>
@@ -160,7 +161,7 @@ export default function RegisterForm({
           gap="4"
           align="flex-start"
           w="full"
-          maxW={{ base: "full", sm: "sm" }}
+          //maxW={{ base: "full", sm: "sm" }}
         >
           <Field.Root invalid={!!errors.phone}>
             <Field.Label>Número de teléfono</Field.Label>

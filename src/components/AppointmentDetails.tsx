@@ -10,6 +10,7 @@ import {
   Grid,
   Avatar,
 } from "@chakra-ui/react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { formatCurrency } from "@/utils";
 import { FiCalendar, FiClock, FiUser, FiFileText } from "react-icons/fi";
 import {
@@ -37,6 +38,8 @@ export default function AppointmentDetails({
   mode,
 }: AppointmentDetailsProps) {
   const navigate = useNavigate();
+
+  const iconColor = useColorModeValue("gray.700", "gray.300");
 
   // Formatear fecha y hora
   const appointmentDate = new Date(appointment.appointmentDate);
@@ -118,7 +121,7 @@ export default function AppointmentDetails({
             </Card.Title>
 
             <VStack align="start" gap={2} mb={3}>
-              <HStack>
+              <HStack color={iconColor}>
                 <FiUser />
                 <Text fontWeight="semibold">
                   {mode === "client"
@@ -127,21 +130,24 @@ export default function AppointmentDetails({
                 </Text>
               </HStack>
 
-              <HStack>
+              <HStack color={iconColor}>
                 <FiCalendar />
                 <Text>{formattedDate}</Text>
               </HStack>
 
-              <HStack>
+              <HStack color={iconColor}>
                 <FiClock />
                 <Text>{formattedTime}</Text>
                 <Badge variant="outline">{durationText}</Badge>
               </HStack>
 
               {appointment.notes && (
-                <HStack align="start">
+                <HStack align="start" color={iconColor}>
                   <FiFileText />
-                  <Text fontSize="sm" color="gray.600">
+                  <Text
+                    fontSize="sm"
+                    color={useColorModeValue("gray.600", "gray.400")}
+                  >
                     {appointment.notes}
                   </Text>
                 </HStack>

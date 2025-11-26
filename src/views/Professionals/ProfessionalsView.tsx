@@ -4,6 +4,7 @@ import type { Professional } from "@/types";
 
 import { Box, Container, Grid, Stack, Text } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 export async function loader() {
   const Professionals = await getAllProfessionals();
@@ -13,18 +14,22 @@ export async function loader() {
 export default function ProfessionalsView() {
   const Professionals = useLoaderData() as Professional[];
 
+  const bgColor = useColorModeValue("bg.canvas", "bg.canvas");
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("blackAlpha.700", "gray.300");
+
   return (
     <>
-      <Box bg="white">
+      <Box bg={bgColor} minH="100vh">
         <Container maxW="6xl" py={{ base: 6, md: 10 }}>
           {/* Encabezado */}
           <Stack gap={2} mb={4}>
-            <Text fontSize="2xl" fontWeight="bold" color="brand.ink">
+            <Text fontSize="2xl" fontWeight="bold" color={headingColor}>
               Profesionales
             </Text>
-            <Text color="blackAlpha.700">
+            <Text color={textColor}>
               Encuentra a los profesionales de salud y belleza que conforman
-              vitalná.
+              vitalá.
             </Text>
           </Stack>
           {/*<SearchServiceForm />*/}

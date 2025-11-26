@@ -5,6 +5,7 @@ import type { Service } from "@/types";
 
 import { Box, Container, Stack, Text } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 export async function loader() {
   const services = await getAllServices();
@@ -13,10 +14,13 @@ export async function loader() {
 
 export default function ServicesView() {
   const services = useLoaderData() as Service[];
+  const bgColor = useColorModeValue("bg.canvas", "bg.canvas");
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("gray.700", "gray.300");
 
   return (
     <>
-      <Box bg="white">
+      <Box bg={bgColor} minH="100vh">
         <Container
           maxW="6xl"
           py={{ base: 4, md: 8, lg: 10 }}
@@ -27,11 +31,11 @@ export default function ServicesView() {
             <Text
               fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}
               fontWeight="bold"
-              color="brand.ink"
+              color={headingColor}
             >
               Servicios
             </Text>
-            <Text color="blackAlpha.700" fontSize={{ base: "sm", md: "md" }}>
+            <Text color={textColor} fontSize={{ base: "sm", md: "md" }}>
               Encuentra el tratamiento ideal para tu bienestar.
             </Text>
           </Stack>

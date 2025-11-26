@@ -6,6 +6,7 @@ import { useFetcher, type ActionFunctionArgs, Form } from "react-router-dom";
 import { toaster } from "@/components/ui/toaster";
 import NewServiceForm from "@/components/Services/NewServiceForm";
 import { createNewService } from "@/api/ServicesAPI";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = Object.fromEntries(await request.formData()); // todo string
@@ -44,6 +45,9 @@ export default function CreateServiceView() {
     isActive: true,
   };
 
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("blackAlpha.700", "gray.300");
+
   const {
     register,
     handleSubmit,
@@ -72,10 +76,10 @@ export default function CreateServiceView() {
       >
         <Card.Root w="full" maxW="520px" shadow="lg" rounded="2xl">
           <Card.Header justifyContent="center" alignItems="center">
-            <Heading size="lg" color="brand.ink">
+            <Heading size="lg" color={headingColor}>
               Nuevo servicio
             </Heading>
-            <Text mt={1} color="blackAlpha.700" fontSize="sm">
+            <Text mt={1} color={textColor} fontSize="sm">
               Agrega un servicio de salud y belleza a tu perfil
             </Text>
           </Card.Header>

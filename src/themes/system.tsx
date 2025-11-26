@@ -42,7 +42,7 @@ const customConfig = defineConfig({
 
         // Text colors
         "fg.default": {
-          value: { base: "{colors.brand.ink}", _dark: "#F7FAFC" },
+          value: { base: "{colors.brand.ink}", _dark: "#FFFFFF" },
         },
         "fg.muted": {
           value: { base: "gray.700", _dark: "gray.300" },

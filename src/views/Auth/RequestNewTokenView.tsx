@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { toaster } from "@/components/ui/toaster";
 import { newToken } from "@/api/AuthAPI";
 import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
+import { useColorModeValue, ColorModeButton } from "@/components/ui/color-mode";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = Object.fromEntries(await request.formData()); // todo string
@@ -50,6 +51,8 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function RequestNewTokenView() {
   const fetcher = useFetcher();
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("blackAlpha.700", "gray.200");
 
   const {
     register,
@@ -80,10 +83,10 @@ export default function RequestNewTokenView() {
       >
         <Card.Root w="full" maxW="520px" shadow="lg" rounded="2xl">
           <Card.Header justifyContent="center" alignItems="center">
-            <Heading size="lg" color="brand.ink">
+            <Heading size="lg" color={headingColor}>
               ¿Necesitas un codigo nuevo de confirmación?
             </Heading>
-            <Text mt={1} color="blackAlpha.700" fontSize="sm">
+            <Text mt={1} color={textColor} fontSize="sm">
               Ingresa tu correo electrónico
             </Text>
           </Card.Header>
@@ -129,6 +132,8 @@ export default function RequestNewTokenView() {
             <Button size="xs" variant="outline">
               <a href="/">Página principal</a>
             </Button>
+
+            <ColorModeButton size="xs" />
 
             <Button size="xs" variant="outline">
               <a href="/">Ayuda</a>

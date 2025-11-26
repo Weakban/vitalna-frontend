@@ -15,6 +15,7 @@ import {
   Spacer,
   AvatarGroup,
 } from "@chakra-ui/react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import type { Professional, Service } from "../../types/index.ts";
 import { getProfessionalById } from "@/api/ProfessionalsAPI.ts";
@@ -114,7 +115,11 @@ export default function ProfessionalInfoView() {
             >
               {professional.specialty}
             </Text>
-            <HStack gap={4} pt={2} color="gray.600">
+            <HStack
+              gap={4}
+              pt={2}
+              color={useColorModeValue("gray.600", "gray.400")}
+            >
               <HStack>
                 <Icon as={MdLocationOn} />
                 <Text fontSize="sm">"Ciudad de México, México"</Text>
@@ -122,20 +127,17 @@ export default function ProfessionalInfoView() {
             </HStack>
           </VStack>
         </HStack>
-
         <HStack gap={4} mt={6}>
           <Button colorScheme="purple">
             Contactar por Email
-            <Icon as={MdEmail} />
+            <Icon as={MdEmail} color="currentColor" />
           </Button>
           <Button variant="outline">
             Llamar ahora
-            <Icon as={MdPhone} />
+            <Icon as={MdPhone} color="currentColor" />
           </Button>
-        </HStack>
-
+        </HStack>{" "}
         <Spacer my={8} />
-
         {/* SECCIÓN DE PESTAÑAS CON LA NUEVA API */}
         <Tabs.Root defaultValue="about" variant="enclosed" colorScheme="purple">
           <Tabs.List>
@@ -149,7 +151,10 @@ export default function ProfessionalInfoView() {
             <Heading as="h3" size="md" mb={4}>
               Acerca de mí
             </Heading>
-            <Text color="gray.700" whiteSpace="pre-wrap">
+            <Text
+              color={useColorModeValue("gray.700", "gray.300")}
+              whiteSpace="pre-wrap"
+            >
               {professional.bio}
             </Text>
           </Tabs.Content>
@@ -181,7 +186,10 @@ export default function ProfessionalInfoView() {
               ))
             ) : (
               // Si la condición es FALSA (el arreglo es nulo, indefinido o está vacío)
-              <Text fontStyle="italic" color="gray.500">
+              <Text
+                fontStyle="italic"
+                color={useColorModeValue("gray.500", "gray.400")}
+              >
                 Este usuario no tiene servicios publicados.
               </Text>
             )}

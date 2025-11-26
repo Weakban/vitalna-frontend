@@ -7,6 +7,7 @@ import { Box, Button, Container, Stack, Text } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 import { IoMdAdd } from "react-icons/io";
 import { useAuthStore } from "@/store/auth";
+import { useColorModeValue } from "@/components/ui/color-mode";
 //const { profile } = useAuthStore.getState();
 export async function loader() {
   const id = useAuthStore.getState().profile.professionalId;
@@ -17,16 +18,21 @@ export async function loader() {
 export default function MyServicesView() {
   const services = useLoaderData() as Service[];
 
+  const bgColor = useColorModeValue("bg.canvas", "bg.canvas");
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("blackAlpha.700", "gray.300");
+  const mutedColor = useColorModeValue("gray.500", "gray.400");
+
   return (
     <>
-      <Box bg="white">
+      <Box bg={bgColor} minH="100vh">
         <Container maxW="6xl" py={{ base: 6, md: 10 }}>
           {/* Encabezado */}
           <Stack gap={2} mb={4}>
-            <Text fontSize="2xl" fontWeight="bold" color="brand.ink">
+            <Text fontSize="2xl" fontWeight="bold" color={headingColor}>
               Mis Servicios
             </Text>
-            <Text color="blackAlpha.700">Administra tus servicios.</Text>
+            <Text color={textColor}>Administra tus servicios.</Text>
           </Stack>
           <SearchServiceForm />
 
@@ -55,7 +61,7 @@ export default function MyServicesView() {
             ))
           ) : (
             // Si la condición es FALSA (el arreglo es nulo, indefinido o está vacío)
-            <Text fontStyle="italic" color="gray.500">
+            <Text fontStyle="italic" color={mutedColor}>
               Todavía no tienes servicios agregados
             </Text>
           )}

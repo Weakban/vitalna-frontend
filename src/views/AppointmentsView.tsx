@@ -8,6 +8,7 @@ import type { Appointment } from "@/types";
 import { Box, Container, Stack, Text, Tabs } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
 import { useAuthStore } from "@/store/auth";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 export async function loader() {
   const { profile } = useAuthStore.getState();
@@ -36,6 +37,11 @@ export default function AppointmentsView() {
     mode: "client" | "professional";
   };
 
+  const bgColor = useColorModeValue("bg.canvas", "bg.canvas");
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("blackAlpha.700", "gray.300");
+  const mutedColor = useColorModeValue("gray.500", "gray.400");
+
   const title = mode === "client" ? "Mis Citas" : "Citas de Pacientes";
   const description =
     mode === "client"
@@ -56,14 +62,14 @@ export default function AppointmentsView() {
 
   return (
     <>
-      <Box bg="white">
+      <Box bg={bgColor} minH="100vh">
         <Container maxW="6xl" py={{ base: 6, md: 10 }}>
           {/* Encabezado */}
           <Stack gap={2} mb={6}>
-            <Text fontSize="2xl" fontWeight="bold" color="brand.ink">
+            <Text fontSize="2xl" fontWeight="bold" color={headingColor}>
               {title}
             </Text>
-            <Text color="blackAlpha.700">{description}</Text>
+            <Text color={textColor}>{description}</Text>
           </Stack>
 
           {/* Tabs para organizar las citas */}
@@ -91,7 +97,7 @@ export default function AppointmentsView() {
                 ))
               ) : (
                 <Box textAlign="center" py={8}>
-                  <Text fontStyle="italic" color="gray.500">
+                  <Text fontStyle="italic" color={mutedColor}>
                     {mode === "client"
                       ? "No tienes citas próximas programadas."
                       : "No hay citas próximas de pacientes."}
@@ -111,7 +117,7 @@ export default function AppointmentsView() {
                 ))
               ) : (
                 <Box textAlign="center" py={8}>
-                  <Text fontStyle="italic" color="gray.500">
+                  <Text fontStyle="italic" color={mutedColor}>
                     {mode === "client"
                       ? "No tienes historial de citas completadas."
                       : "No hay historial de citas completadas."}
@@ -131,7 +137,7 @@ export default function AppointmentsView() {
                 ))
               ) : (
                 <Box textAlign="center" py={8}>
-                  <Text fontStyle="italic" color="gray.500">
+                  <Text fontStyle="italic" color={mutedColor}>
                     No hay citas canceladas.
                   </Text>
                 </Box>

@@ -24,6 +24,7 @@ import {
   Stack,
   Field,
 } from "@chakra-ui/react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { FaTrash, FaPlus } from "react-icons/fa";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -215,6 +216,14 @@ export default function ProfessionalScheduleView() {
   const exceptionFetcher = useFetcher();
   const deleteExceptionFetcher = useFetcher();
 
+  // Colores adaptativos para modo oscuro
+  const pageBgColor = useColorModeValue("bg.canvas", "bg.canvas");
+  const cardBgColor = useColorModeValue("white", "gray.800");
+  const borderColor = useColorModeValue("gray.200", "gray.600");
+  const mutedColor = useColorModeValue("gray.500", "gray.400");
+  const successColor = useColorModeValue("green.500", "green.400");
+  const errorColor = useColorModeValue("red.500", "red.400");
+
   // --- Estado para el Horario Semanal (inicializado con datos del loader) ---
   const [weeklySchedule, setWeeklySchedule] = useState<WeeklyDaySchedule[]>(
     initialWeeklySchedule
@@ -317,7 +326,7 @@ export default function ProfessionalScheduleView() {
 
   // --- INICIO DEL BLOQUE JSX ---
   return (
-    <Box p={{ base: 4, md: 8 }}>
+    <Box p={{ base: 4, md: 8 }} bg={pageBgColor} minH="100vh">
       <Heading as="h1" size="xl" mb={6}>
         Gestionar mi Disponibilidad
       </Heading>
@@ -338,7 +347,8 @@ export default function ProfessionalScheduleView() {
                 p={4}
                 borderWidth="1px"
                 borderRadius="md"
-                bg="white"
+                bg={cardBgColor}
+                borderColor={borderColor}
               >
                 <HStack justifyContent="space-between" mb={4}>
                   <Heading size="md">{day.dayName}</Heading>
@@ -377,6 +387,8 @@ export default function ProfessionalScheduleView() {
                               e.target.value
                             )
                           }
+                          borderWidth="1px"
+                          borderColor={borderColor}
                         />
                         <Text>-</Text>
                         <Input
@@ -390,6 +402,8 @@ export default function ProfessionalScheduleView() {
                               e.target.value
                             )
                           }
+                          borderWidth="1px"
+                          borderColor={borderColor}
                         />
                         <IconButton
                           aria-label="Eliminar bloque"
@@ -437,7 +451,8 @@ export default function ProfessionalScheduleView() {
                 p={6}
                 borderWidth="1px"
                 borderRadius="md"
-                bg="white"
+                bg={cardBgColor}
+                borderColor={borderColor}
                 align="stretch"
               >
                 <Heading size="md">Añadir Excepción</Heading>
@@ -452,6 +467,8 @@ export default function ProfessionalScheduleView() {
                         {...field}
                         type="date"
                         min={format(new Date(), "yyyy-MM-dd")}
+                        borderWidth="1px"
+                        borderColor={borderColor}
                       />
                     )}
                   />
@@ -499,7 +516,14 @@ export default function ProfessionalScheduleView() {
                       <Controller
                         name="startTime"
                         control={exceptionForm.control}
-                        render={({ field }) => <Input {...field} type="time" />}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            type="time"
+                            borderWidth="1px"
+                            borderColor={borderColor}
+                          />
+                        )}
                       />
                     </Field.Root>
                     <Text alignSelf="end" pb={2}>
@@ -510,7 +534,14 @@ export default function ProfessionalScheduleView() {
                       <Controller
                         name="endTime"
                         control={exceptionForm.control}
-                        render={({ field }) => <Input {...field} type="time" />}
+                        render={({ field }) => (
+                          <Input
+                            {...field}
+                            type="time"
+                            borderWidth="1px"
+                            borderColor={borderColor}
+                          />
+                        )}
                       />
                     </Field.Root>
                   </HStack>
@@ -529,14 +560,17 @@ export default function ProfessionalScheduleView() {
             <VStack gap={4} align="stretch">
               <Heading size="md">Mis Excepciones</Heading>
               {exceptions.length === 0 && (
-                <Text color="gray.500">No tienes excepciones programadas.</Text>
+                <Text color={mutedColor}>
+                  No tienes excepciones programadas.
+                </Text>
               )}
               {exceptions.map((ex) => (
                 <HStack
                   key={ex.id}
                   p={4}
-                  bg="white"
+                  bg={cardBgColor}
                   borderWidth="1px"
+                  borderColor={borderColor}
                   borderRadius="md"
                   justifyContent="space-between"
                 >
@@ -582,11 +616,11 @@ export default function ProfessionalScheduleView() {
                       })()}
                     </Text>
                     {ex.isAvailable ? (
-                      <Text color="green.500">
+                      <Text color={successColor}>
                         Disponible: {ex.startTime} - {ex.endTime}
                       </Text>
                     ) : (
-                      <Text color="red.500">Día No Disponible</Text>
+                      <Text color={errorColor}>Día No Disponible</Text>
                     )}
                   </Box>
                   <IconButton

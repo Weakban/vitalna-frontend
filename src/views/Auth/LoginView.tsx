@@ -12,6 +12,7 @@ import Mesa from "../../assets/Mesa.jpg";
 import { toaster } from "@/components/ui/toaster";
 import { login, getProfileData } from "@/api/AuthAPI";
 import { useAuthStore } from "../../store/auth";
+import { useColorModeValue, ColorModeButton } from "@/components/ui/color-mode";
 const { setToken, setIsAuth, setProfile } = useAuthStore.getState();
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -55,6 +56,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function LoginView() {
   const fetcher = useFetcher();
+  const textColor = useColorModeValue("gray.700", "gray.200");
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const linkColor = useColorModeValue("brand.Cblue", "brand.Cmint");
+
   const initialValues: LoginFormData = {
     email: "",
     password: "",
@@ -97,6 +102,8 @@ export default function LoginView() {
               <a href="/">Página principal</a>
             </Button>
 
+            <ColorModeButton size={{ base: "xs", md: "sm" }} />
+
             <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
               <a href="/">Ayuda</a>
             </Button>
@@ -110,7 +117,7 @@ export default function LoginView() {
           >
             <Heading
               size={{ base: "lg", md: "xl" }}
-              color="brand.ink"
+              color={headingColor}
               fontWeight="bold"
               letterSpacing="tight"
             >
@@ -118,7 +125,7 @@ export default function LoginView() {
             </Heading>
             <Text
               mt={2}
-              color="blackAlpha.700"
+              color={textColor}
               fontSize={{ base: "sm", md: "md" }}
               textAlign="center"
               lineHeight="tall"
@@ -160,14 +167,14 @@ export default function LoginView() {
               </Button>
 
               <Box textAlign="center">
-                <Text fontSize="sm" color="blackAlpha.700" display="inline">
+                <Text fontSize="sm" color={textColor} display="inline">
                   ¿Todavía no tienes cuenta?{" "}
                 </Text>
                 <Button
                   asChild
                   variant="plain"
                   size="sm"
-                  color="brand.Cblue"
+                  color={linkColor}
                   fontWeight="semibold"
                   _hover={{ textDecoration: "underline" }}
                   px={1}

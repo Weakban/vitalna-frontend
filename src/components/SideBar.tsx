@@ -9,7 +9,7 @@ import {
   type FlexProps,
   Separator,
 } from "@chakra-ui/react";
-import { useColorModeValue } from "./ui/color-mode";
+import { useColorModeValue, ColorModeButton } from "./ui/color-mode";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   FiUsers,
@@ -19,7 +19,7 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import { MdOutlineMedicalServices } from "react-icons/md";
-import { LuHandCoins, LuMessageSquareText } from "react-icons/lu";
+import { LuMessageSquareText } from "react-icons/lu";
 import { BsKanban } from "react-icons/bs";
 import UserAvatar from "./UserAvatar";
 import vitalna from "../assets/Vitalna.svg";
@@ -49,11 +49,12 @@ export const LinkItems: Array<LinkItemProps> = [
     icon: FiBriefcase,
     roles: ["CLIENT"],
   },
+  /*
   {
     name: "Promociones y ofertas",
     path: "/promociones_y_ofertas",
     icon: LuHandCoins,
-  },
+  },*/
   {
     name: "Mis citas",
     path: "/app/appointments",
@@ -106,14 +107,20 @@ export default function Sidebar() {
         <Flex direction="column" h="100%" justify="space-between">
           {/* Header */}
           <Box bg={headerBg} w="full" py={8} px={6} boxShadow="sm">
-            <Flex justify="center" align="center">
-              <Image
-                alt="Vitalna Logo"
-                objectFit="contain"
-                src={vitalna}
-                maxH="70px"
-                w="auto"
-              />
+            <Flex direction="column" gap={4}>
+              <Flex justify="center" align="center">
+                <Image
+                  alt="Vitalna Logo"
+                  objectFit="contain"
+                  src={vitalna}
+                  maxH="70px"
+                  w="auto"
+                />
+              </Flex>
+
+              <Flex justify="center">
+                <ColorModeButton size="sm" />
+              </Flex>
             </Flex>
           </Box>
 
@@ -124,7 +131,7 @@ export default function Sidebar() {
             <Text
               fontSize="sm"
               fontWeight="bold"
-              color="gray.500"
+              color={useColorModeValue("gray.500", "gray.400")}
               textTransform="uppercase"
               letterSpacing="wider"
               px={6}
@@ -196,6 +203,22 @@ const NavItem = ({ icon, name, path, ...rest }: NavItemProps) => {
   const location = useLocation();
   const isActive = location.pathname === path;
 
+  const activeBg = useColorModeValue("cyan.50", "cyan.900");
+  const activeColor = useColorModeValue("cyan.700", "cyan.200");
+  const inactiveColor = useColorModeValue("gray.700", "gray.300");
+  const hoverBg = useColorModeValue(
+    isActive ? "cyan.100" : "gray.100",
+    isActive ? "cyan.800" : "gray.700"
+  );
+  const hoverColor = useColorModeValue(
+    isActive ? "cyan.800" : "gray.900",
+    isActive ? "cyan.100" : "white"
+  );
+  const iconColor = useColorModeValue(
+    isActive ? "cyan.600" : "gray.600",
+    isActive ? "cyan.300" : "gray.400"
+  );
+
   const handleClick = () => {
     navigate(path);
   };
@@ -212,23 +235,19 @@ const NavItem = ({ icon, name, path, ...rest }: NavItemProps) => {
       cursor="pointer"
       fontWeight={isActive ? "semibold" : "medium"}
       fontSize="md"
-      bg={isActive ? "cyan.50" : "transparent"}
-      color={isActive ? "cyan.700" : "gray.700"}
+      bg={isActive ? activeBg : "transparent"}
+      color={isActive ? activeColor : inactiveColor}
       borderLeft="3px solid"
       borderLeftColor={isActive ? "cyan.500" : "transparent"}
       transition="all 0.2s"
       _hover={{
-        bg: isActive ? "cyan.100" : "gray.100",
-        color: isActive ? "cyan.800" : "gray.900",
+        bg: hoverBg,
+        color: hoverColor,
         transform: "translateX(4px)",
       }}
       {...rest}
     >
-      <Icon
-        fontSize="22"
-        as={icon}
-        color={isActive ? "cyan.600" : "gray.600"}
-      />
+      <Icon fontSize="22" as={icon} color={iconColor} />
       <Text>{name}</Text>
     </Flex>
   );

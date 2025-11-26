@@ -1,4 +1,12 @@
-import { Box, Text, Card, Button, Heading, Field } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Card,
+  Button,
+  Heading,
+  Field,
+  Flex,
+} from "@chakra-ui/react";
 import { Form, useFetcher, type ActionFunctionArgs } from "react-router-dom";
 
 import { Controller, useForm } from "react-hook-form";
@@ -9,6 +17,7 @@ import { confirmAccount } from "@/api/AuthAPI";
 import { PinInput } from "@chakra-ui/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useColorModeValue, ColorModeButton } from "@/components/ui/color-mode";
 
 const formSchema = z.object({
   token: z
@@ -49,6 +58,8 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function ConfirmAccountView() {
   const fetcher = useFetcher();
+  const headingColor = useColorModeValue("brand.ink", "white");
+  const textColor = useColorModeValue("blackAlpha.700", "gray.200");
 
   const { handleSubmit, control, formState } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -83,10 +94,10 @@ export default function ConfirmAccountView() {
       >
         <Card.Root w="full" maxW="520px" shadow="lg" rounded="2xl">
           <Card.Header justifyContent="center" alignItems="center">
-            <Heading size="lg" color="brand.ink">
+            <Heading size="lg" color={headingColor}>
               Confirma tu cuenta
             </Heading>
-            <Text mt={1} color="blackAlpha.700" fontSize="sm">
+            <Text mt={1} color={textColor} fontSize="sm">
               Introduce el token que recibiste a tu correo electrónico
             </Text>
           </Card.Header>
@@ -139,7 +150,7 @@ export default function ConfirmAccountView() {
             >
               <a href="">Inicio</a>
             </Button>
-            <Text fontSize="sm" color="blackAlpha.700" textAlign="center">
+            <Text fontSize="sm" color={textColor} textAlign="center">
               Solicita un nuevo token:{" "}
             </Text>
             <Button
@@ -152,6 +163,17 @@ export default function ConfirmAccountView() {
               <a href="/auth/request-code">Nuevo token</a>
             </Button>
           </Card.Footer>
+          <Flex justify="space-between" gap="4" paddingX={2} paddingBottom={2}>
+            <Button size="xs" variant="outline">
+              <a href="/">Página principal</a>
+            </Button>
+
+            <ColorModeButton size="xs" />
+
+            <Button size="xs" variant="outline">
+              <a href="/">Ayuda</a>
+            </Button>
+          </Flex>
         </Card.Root>
       </Box>
     </>

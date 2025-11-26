@@ -15,7 +15,7 @@ export default function LoginForm({ errors, register }: LoginFormProps) {
       gap="5"
       align="flex-start"
       w="full"
-      maxW={{ base: "full", sm: "sm" }}
+      //maxW={{ base: "full", sm: "sm" }}
     >
       <Field.Root invalid={!!errors.email} w="full">
         <Field.Label fontWeight="medium" mb={2}>

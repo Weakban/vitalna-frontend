@@ -10,6 +10,7 @@ import {
   Icon,
   Spacer,
 } from "@chakra-ui/react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { MdWorkOutline } from "react-icons/md"; // Importamos un ícono
 
 type ProfessionalCardProps = {
@@ -18,12 +19,17 @@ type ProfessionalCardProps = {
 export default function ProfessionalCard({
   professional,
 }: ProfessionalCardProps) {
+  const bgColor = useColorModeValue("white", "gray.800");
+  const borderColor = useColorModeValue("gray.200", "gray.600");
+  const specialtyColor = useColorModeValue("gray.500", "gray.400");
+  const bioColor = useColorModeValue("gray.600", "gray.300");
+
   return (
     <GridItem
       key={professional.id}
-      bg="white"
+      bg={bgColor}
       borderWidth="1px"
-      borderColor="gray.200"
+      borderColor={borderColor}
       borderRadius="xl" // Bordes más redondeados
       overflow="hidden"
       boxShadow="md"
@@ -43,14 +49,14 @@ export default function ProfessionalCard({
             <Heading size="md" textAlign="center">
               {professional.user.name}
             </Heading>
-            <HStack color="gray.500">
-              <Icon as={MdWorkOutline} />
+            <HStack color={specialtyColor}>
+              <Icon as={MdWorkOutline} color="currentColor" />
               <Text fontSize="sm">{professional.specialty}</Text>
             </HStack>
           </VStack>
         </VStack>
         {/* Biografía */}
-        <Text color="gray.600" fontSize="sm" textAlign="center" lineClamp={3}>
+        <Text color={bioColor} fontSize="sm" textAlign="center" lineClamp={3}>
           {professional.bio}
         </Text>
         <Spacer /> {/* Este componente empuja el botón hacia abajo */}

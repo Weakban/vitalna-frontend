@@ -6,6 +6,7 @@ import Mesa from "../../assets/Mesa.jpg";
 import { createAccount } from "@/api/AuthAPI";
 import { useFetcher, type ActionFunctionArgs, Form } from "react-router-dom";
 import { toaster } from "@/components/ui/toaster";
+import { useColorModeValue, ColorModeButton } from "@/components/ui/color-mode";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = Object.fromEntries(await request.formData()); // todo string
@@ -37,6 +38,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function RegisterView() {
   const fetcher = useFetcher();
+  const textColor = useColorModeValue("gray.700", "gray.200");
+  const headingColor = useColorModeValue("brand.ink", "white");
+
   const initialValues: RegisterFormData = {
     email: "",
     name: "",
@@ -82,6 +86,8 @@ export default function RegisterView() {
               <a href="/">Página principal</a>
             </Button>
 
+            <ColorModeButton size={{ base: "xs", md: "sm" }} />
+
             <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
               <a href="/">Ayuda</a>
             </Button>
@@ -91,12 +97,12 @@ export default function RegisterView() {
             alignItems="center"
             px={{ base: 4, md: 6 }}
           >
-            <Heading size={{ base: "md", md: "lg" }} color="brand.ink">
+            <Heading size={{ base: "md", md: "lg" }} color={headingColor}>
               Crea tu cuenta
             </Heading>
             <Text
               mt={1}
-              color="blackAlpha.700"
+              color={textColor}
               fontSize={{ base: "xs", md: "sm" }}
               textAlign="center"
             >
@@ -125,12 +131,7 @@ export default function RegisterView() {
               px={{ base: 4, md: 6 }}
               py={{ base: 6, md: 8 }}
             >
-              <Text
-                fontSize="sm"
-                color="blackAlpha.700"
-                textAlign="center"
-                mt={2}
-              >
+              <Text fontSize="sm" color={textColor} textAlign="center" mt={2}>
                 Llena el formulario para:{" "}
               </Text>
               <Button
@@ -144,7 +145,7 @@ export default function RegisterView() {
               >
                 Crear cuenta
               </Button>
-              <Text fontSize="sm" color="blackAlpha.700" textAlign="center">
+              <Text fontSize="sm" color={textColor} textAlign="center">
                 ¿Ya tienes cuenta?{" "}
               </Text>
               <Button

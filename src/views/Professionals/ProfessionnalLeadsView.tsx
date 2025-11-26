@@ -1,4 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { LeadColumn } from "../../components/Professionals/LeadColumn";
 import type { LeadColumnData, LeadCardData, OdooLead } from "../../types/index";
 import { getMyLeads } from "@/api/ProfessionalsAPI";
@@ -38,6 +39,8 @@ export default function ProfessionnalLeadsView() {
   // Obtenemos los datos crudos de Odoo desde el loader
   const odooLeads = useLoaderData() as OdooLead[];
 
+  const bgColor = useColorModeValue("bg.canvas", "bg.canvas");
+
   // Transformamos los datos de Odoo al formato que nuestros componentes necesitan
   const leads: LeadCardData[] = odooLeads.map((lead) => ({
     id: lead.id,
@@ -48,7 +51,7 @@ export default function ProfessionnalLeadsView() {
   }));
 
   return (
-    <Box p={{ base: 4, md: 8 }} bg="gray.100" minH="100vh" overflowX="auto">
+    <Box p={{ base: 4, md: 8 }} bg={bgColor} minH="100vh" overflowX="auto">
       <Flex
         direction={{ base: "column", md: "row" }}
         gap={6}

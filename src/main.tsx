@@ -48,7 +48,7 @@ function AppLoadingFallback() {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Provider>
+    <Provider defaultTheme="light">
       <CustomColorProvider>
         <Suspense fallback={<AppLoadingFallback />}>
           <RouterProvider router={router} />

@@ -17,6 +17,7 @@ import {
   Textarea,
   Field,
 } from "@chakra-ui/react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import { toaster } from "@/components/ui/toaster";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // Estilos base del calendario
@@ -284,7 +285,10 @@ export default function BookingPage() {
               <Text fontWeight="semibold" textStyle="sm">
                 {service.provider.user.name}
               </Text>
-              <Text color="fg.muted" textStyle="sm">
+              <Text
+                color={useColorModeValue("fg.muted", "gray.400")}
+                textStyle="sm"
+              >
                 {service.provider.specialty}
               </Text>
             </Stack>
@@ -296,7 +300,7 @@ export default function BookingPage() {
           <Heading as="h1" size="xl">
             {service.name}
           </Heading>
-          <HStack gap={4} color="gray.600">
+          <HStack gap={4} color={useColorModeValue("gray.600", "gray.400")}>
             <HStack>
               <Icon as={MdAccessTime} />
               <Text>{service.durationMin} min.</Text>
@@ -306,7 +310,7 @@ export default function BookingPage() {
               <Text>${service.price} MXN</Text>
             </HStack>
           </HStack>
-          <Text fontSize="lg" color="gray.700">
+          <Text fontSize="lg" color={useColorModeValue("gray.700", "gray.300")}>
             {service.description}
           </Text>
         </VStack>
