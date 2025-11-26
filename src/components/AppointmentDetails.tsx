@@ -13,12 +13,7 @@ import {
 import { useColorModeValue } from "@/components/ui/color-mode";
 import { formatCurrency } from "@/utils";
 import { FiCalendar, FiClock, FiUser, FiFileText } from "react-icons/fi";
-import {
-  Form,
-  useNavigate,
-  redirect,
-  type ActionFunctionArgs,
-} from "react-router-dom";
+import { Form, redirect, type ActionFunctionArgs } from "react-router-dom";
 
 type AppointmentDetailsProps = {
   appointment: Appointment;
@@ -37,8 +32,6 @@ export default function AppointmentDetails({
   appointment,
   mode,
 }: AppointmentDetailsProps) {
-  const navigate = useNavigate();
-
   const iconColor = useColorModeValue("gray.700", "gray.300");
 
   // Formatear fecha y hora
