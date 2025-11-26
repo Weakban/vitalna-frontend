@@ -44,6 +44,13 @@ export async function action({ request }: ActionFunctionArgs) {
       setToken(tokenResolved);
       const profileInfo = await getProfileData(tokenResolved);
       setProfile(profileInfo);
+
+      // Redirigir según el rol del usuario
+      if (profileInfo.role === "PROFESSIONAL") {
+        return redirect("/app/appointments");
+      } else {
+        return redirect("/app/services");
+      }
     }
 
     return redirect("/app/services");

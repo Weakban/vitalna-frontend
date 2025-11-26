@@ -63,19 +63,6 @@ export async function login(formData: UserData /*UserFormData */) {
     if (result.success) {
       console.log(result.data);
       const { data } = await api.post("/app/auth/login", result.data);
-      //setToken(data);
-
-      // if (data) {
-      //   try {
-      //     const profileInfo = await getProfileData(data);
-      //     if (profileInfo) {
-      //       setProfile(profileInfo);
-      //     }
-      //   } catch (error) {
-      //     const message = "Error al obtener informacion de usuario";
-      //     throw new Error(message);
-      //   }
-      // }
 
       console.log(data);
 

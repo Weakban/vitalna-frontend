@@ -92,19 +92,28 @@ export default function AppointmentDetails({
   };
 
   return (
-    <Box paddingY={"2"} maxW="6xl">
+    <Box paddingY={{ base: "2", md: "3" }} maxW="6xl">
       <Card.Root
         rounded="2xl"
         overflow="hidden"
         borderWidth="1px"
         borderRadius="lg"
-        flexDirection="row"
+        flexDirection={{ base: "column", md: "row" }}
         transition="all 0.2s"
         _hover={{ transform: "scale(1.02)", shadow: "lg" }}
       >
         {/* Avatar/Icono */}
-        <Box display="flex" alignItems="center" p={4}>
-          <Avatar.Root size="lg" bg="brand.Cblue" color="white">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent={{ base: "center", md: "flex-start" }}
+          p={{ base: 3, md: 4 }}
+        >
+          <Avatar.Root
+            size={{ base: "md", md: "lg" }}
+            bg="brand.Cblue"
+            color="white"
+          >
             <Avatar.Fallback>
               {mode === "client"
                 ? appointment.professional?.user?.name?.charAt(0) || "P"
@@ -113,15 +122,28 @@ export default function AppointmentDetails({
           </Avatar.Root>
         </Box>
 
-        <Grid templateColumns="2fr 1fr" gap={4} p={4} flex="1">
+        <Grid
+          templateColumns={{ base: "1fr", lg: "2fr 1fr" }}
+          gap={{ base: 3, md: 4 }}
+          p={{ base: 3, md: 4 }}
+          flex="1"
+        >
           {/* Columna izquierda - Información principal */}
           <Box>
-            <Card.Title fontWeight="semibold" mb={2}>
+            <Card.Title
+              fontWeight="semibold"
+              mb={{ base: 2, md: 3 }}
+              fontSize={{ base: "md", md: "lg" }}
+            >
               {appointment.service?.name || "Servicio no disponible"}
             </Card.Title>
 
-            <VStack align="start" gap={2} mb={3}>
-              <HStack color={iconColor}>
+            <VStack
+              align="start"
+              gap={{ base: 1.5, md: 2 }}
+              mb={{ base: 2, md: 3 }}
+            >
+              <HStack color={iconColor} fontSize={{ base: "sm", md: "md" }}>
                 <FiUser />
                 <Text fontWeight="semibold">
                   {mode === "client"
@@ -130,22 +152,34 @@ export default function AppointmentDetails({
                 </Text>
               </HStack>
 
-              <HStack color={iconColor}>
+              <HStack color={iconColor} fontSize={{ base: "sm", md: "md" }}>
                 <FiCalendar />
                 <Text>{formattedDate}</Text>
               </HStack>
 
-              <HStack color={iconColor}>
-                <FiClock />
-                <Text>{formattedTime}</Text>
-                <Badge variant="outline">{durationText}</Badge>
+              <HStack
+                color={iconColor}
+                fontSize={{ base: "sm", md: "md" }}
+                flexWrap="wrap"
+              >
+                <HStack>
+                  <FiClock />
+                  <Text>{formattedTime}</Text>
+                </HStack>
+                <Badge variant="outline" fontSize={{ base: "xs", md: "sm" }}>
+                  {durationText}
+                </Badge>
               </HStack>
 
               {appointment.notes && (
-                <HStack align="start" color={iconColor}>
+                <HStack
+                  align="start"
+                  color={iconColor}
+                  fontSize={{ base: "sm", md: "md" }}
+                >
                   <FiFileText />
                   <Text
-                    fontSize="sm"
+                    fontSize={{ base: "xs", md: "sm" }}
                     color={useColorModeValue("gray.600", "gray.400")}
                   >
                     {appointment.notes}
@@ -154,12 +188,23 @@ export default function AppointmentDetails({
               )}
             </VStack>
 
-            <HStack mt="3" gap={3}>
-              <Badge colorScheme={getStatusColor(appointment.status)}>
+            <HStack
+              mt={{ base: 2, md: 3 }}
+              gap={{ base: 2, md: 3 }}
+              flexWrap="wrap"
+            >
+              <Badge
+                colorScheme={getStatusColor(appointment.status)}
+                fontSize={{ base: "xs", md: "sm" }}
+              >
                 {getStatusText(appointment.status)}
               </Badge>
               {appointment.service?.price && (
-                <Text fontWeight="bold" color="green.600">
+                <Text
+                  fontWeight="bold"
+                  color="green.600"
+                  fontSize={{ base: "sm", md: "md" }}
+                >
                   {formatCurrency(appointment.service.price)}
                 </Text>
               )}
@@ -167,7 +212,7 @@ export default function AppointmentDetails({
           </Box>
 
           {/* Columna derecha - Acciones */}
-          <VStack align="stretch" gap={3} justify="center">
+          <VStack align="stretch" gap={{ base: 2, md: 3 }} justify="center">
             {mode === "professional" ? (
               // Vista para profesional
               <>
@@ -177,6 +222,7 @@ export default function AppointmentDetails({
                       bg="green.500"
                       color="white"
                       _hover={{ bg: "green.600" }}
+                      size={{ base: "sm", md: "md" }}
                     >
                       Marcar Completada
                     </Button>
@@ -184,20 +230,12 @@ export default function AppointmentDetails({
                       bg="orange.500"
                       color="white"
                       _hover={{ bg: "orange.600" }}
+                      size={{ base: "sm", md: "md" }}
                     >
                       Reprogramar
                     </Button>
                   </>
                 )}
-
-                <Button
-                  variant="outline"
-                  onClick={() =>
-                    navigate(`/app/appointments/${appointment.id}/details`)
-                  }
-                >
-                  Ver Detalles
-                </Button>
 
                 {appointment.status === "RESERVED" && (
                   <Form
@@ -215,6 +253,7 @@ export default function AppointmentDetails({
                       color="white"
                       type="submit"
                       _hover={{ bg: "red.600" }}
+                      size={{ base: "sm", md: "md" }}
                     >
                       Cancelar
                     </Button>
@@ -229,25 +268,18 @@ export default function AppointmentDetails({
                     bg="orange.500"
                     color="white"
                     _hover={{ bg: "orange.600" }}
+                    size={{ base: "sm", md: "md" }}
                   >
                     Reprogramar
                   </Button>
                 )}
-
-                <Button
-                  variant="outline"
-                  onClick={() =>
-                    navigate(`/app/appointments/${appointment.id}/details`)
-                  }
-                >
-                  Ver Detalles
-                </Button>
 
                 {appointment.status === "COMPLETED" && (
                   <Button
                     bg="brand.Cblue"
                     color="white"
                     _hover={{ bg: "brand.Cmint" }}
+                    size={{ base: "sm", md: "md" }}
                   >
                     Calificar
                   </Button>
@@ -269,6 +301,7 @@ export default function AppointmentDetails({
                       color="white"
                       type="submit"
                       _hover={{ bg: "red.600" }}
+                      size={{ base: "sm", md: "md" }}
                     >
                       Cancelar
                     </Button>

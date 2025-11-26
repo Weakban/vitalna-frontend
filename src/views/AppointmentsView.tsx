@@ -63,25 +63,54 @@ export default function AppointmentsView() {
   return (
     <>
       <Box bg={bgColor} minH="100vh">
-        <Container maxW="6xl" py={{ base: 6, md: 10 }}>
+        <Container
+          maxW="6xl"
+          py={{ base: 4, md: 6, lg: 10 }}
+          px={{ base: 4, md: 6 }}
+        >
           {/* Encabezado */}
-          <Stack gap={2} mb={6}>
-            <Text fontSize="2xl" fontWeight="bold" color={headingColor}>
+          <Stack gap={{ base: 1, md: 2 }} mb={{ base: 4, md: 6 }}>
+            <Text
+              fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}
+              fontWeight="bold"
+              color={headingColor}
+            >
               {title}
             </Text>
-            <Text color={textColor}>{description}</Text>
+            <Text color={textColor} fontSize={{ base: "sm", md: "md" }}>
+              {description}
+            </Text>
           </Stack>
 
           {/* Tabs para organizar las citas */}
           <Tabs.Root defaultValue="upcoming" variant="enclosed">
-            <Tabs.List mb={4}>
-              <Tabs.Trigger value="upcoming">
+            <Tabs.List
+              mb={{ base: 3, md: 4 }}
+              flexWrap="wrap"
+              gap={{ base: 1, md: 2 }}
+            >
+              <Tabs.Trigger
+                value="upcoming"
+                fontSize={{ base: "xs", md: "sm" }}
+                px={{ base: 2, md: 4 }}
+                py={{ base: 1, md: 2 }}
+              >
                 Próximas ({upcomingAppointments.length})
               </Tabs.Trigger>
-              <Tabs.Trigger value="completed">
+              <Tabs.Trigger
+                value="completed"
+                fontSize={{ base: "xs", md: "sm" }}
+                px={{ base: 2, md: 4 }}
+                py={{ base: 1, md: 2 }}
+              >
                 Completadas ({completedAppointments.length})
               </Tabs.Trigger>
-              <Tabs.Trigger value="cancelled">
+              <Tabs.Trigger
+                value="cancelled"
+                fontSize={{ base: "xs", md: "sm" }}
+                px={{ base: 2, md: 4 }}
+                py={{ base: 1, md: 2 }}
+              >
                 Canceladas ({cancelledAppointments.length})
               </Tabs.Trigger>
             </Tabs.List>
@@ -96,8 +125,16 @@ export default function AppointmentsView() {
                   />
                 ))
               ) : (
-                <Box textAlign="center" py={8}>
-                  <Text fontStyle="italic" color={mutedColor}>
+                <Box
+                  textAlign="center"
+                  py={{ base: 6, md: 8 }}
+                  px={{ base: 4, md: 0 }}
+                >
+                  <Text
+                    fontStyle="italic"
+                    color={mutedColor}
+                    fontSize={{ base: "sm", md: "md" }}
+                  >
                     {mode === "client"
                       ? "No tienes citas próximas programadas."
                       : "No hay citas próximas de pacientes."}
@@ -116,8 +153,16 @@ export default function AppointmentsView() {
                   />
                 ))
               ) : (
-                <Box textAlign="center" py={8}>
-                  <Text fontStyle="italic" color={mutedColor}>
+                <Box
+                  textAlign="center"
+                  py={{ base: 6, md: 8 }}
+                  px={{ base: 4, md: 0 }}
+                >
+                  <Text
+                    fontStyle="italic"
+                    color={mutedColor}
+                    fontSize={{ base: "sm", md: "md" }}
+                  >
                     {mode === "client"
                       ? "No tienes historial de citas completadas."
                       : "No hay historial de citas completadas."}
@@ -136,8 +181,16 @@ export default function AppointmentsView() {
                   />
                 ))
               ) : (
-                <Box textAlign="center" py={8}>
-                  <Text fontStyle="italic" color={mutedColor}>
+                <Box
+                  textAlign="center"
+                  py={{ base: 6, md: 8 }}
+                  px={{ base: 4, md: 0 }}
+                >
+                  <Text
+                    fontStyle="italic"
+                    color={mutedColor}
+                    fontSize={{ base: "sm", md: "md" }}
+                  >
                     No hay citas canceladas.
                   </Text>
                 </Box>

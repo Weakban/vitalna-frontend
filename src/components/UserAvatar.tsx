@@ -5,13 +5,12 @@ import {
   Text,
   VStack,
   Badge,
-  IconButton,
+  Button,
   Separator,
 } from "@chakra-ui/react";
 import { FiUser, FiLogOut } from "react-icons/fi";
 import { useAuthStore } from "@/store/auth";
 import { useNavigate } from "react-router-dom";
-import { Tooltip } from "./ui/tooltip";
 
 export default function UserAvatar() {
   const profile = useAuthStore((state) => state.profile);
@@ -86,33 +85,29 @@ export default function UserAvatar() {
         <Separator />
 
         {/* Action Buttons */}
-        <HStack gap={2} justify="space-around">
-          <Tooltip content="Mi Perfil">
-            <IconButton
-              aria-label="Mi Perfil"
-              size="sm"
-              variant="ghost"
-              onClick={handleProfile}
-              color="brand.Cblue"
-              _hover={{ bg: "brand.Cmint" }}
-            >
-              <FiUser size={18} />
-            </IconButton>
-          </Tooltip>
+        <VStack gap={2} align="stretch">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleProfile}
+            colorPalette="blue"
+            justifyContent="flex-start"
+          >
+            <FiUser size={16} />
+            Mi Perfil
+          </Button>
 
-          <Tooltip content="Cerrar Sesión">
-            <IconButton
-              aria-label="Cerrar Sesión"
-              size="sm"
-              variant="ghost"
-              onClick={handleLogout}
-              color="red.500"
-              _hover={{ bg: "red.50" }}
-            >
-              <FiLogOut size={18} />
-            </IconButton>
-          </Tooltip>
-        </HStack>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleLogout}
+            colorPalette="red"
+            justifyContent="flex-start"
+          >
+            <FiLogOut size={16} />
+            Cerrar Sesión
+          </Button>
+        </VStack>
       </VStack>
     </Box>
   );
