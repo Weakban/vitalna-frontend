@@ -23,7 +23,7 @@ export default function UserAvatar() {
   };
 
   const handleProfile = () => {
-    navigate("/account");
+    navigate("/app/account");
   };
 
   const getRoleBadge = () => {

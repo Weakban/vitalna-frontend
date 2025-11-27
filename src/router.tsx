@@ -10,6 +10,12 @@ import CreateServiceView, {
 import ServicesView, {
   loader as servicesLoader,
 } from "./views/Services/ServicesView";
+
+import ProfileView, {
+  loader as profileLoader,
+  action as profileAction,
+} from "./views/ProfileView";
+
 import MyServicesView, {
   loader as myServicesLoader,
 } from "./views/Services/MyServicesView";
@@ -87,6 +93,13 @@ export const router = createBrowserRouter([
             path: "services",
             element: <ServicesView />,
             loader: servicesLoader,
+          },
+          {
+            //Mostrar servicios
+            path: "account",
+            element: <ProfileView />,
+            loader: profileLoader,
+            action: profileAction,
           },
           {
             //Mostrar servicios
