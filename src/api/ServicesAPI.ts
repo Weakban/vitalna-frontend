@@ -50,7 +50,7 @@ export async function createNewService(formData: ServiceForm) {
 export async function getAllServices() {
   try {
     const { data } = await api("/app/services");
-    console.log(data);
+    //console.log(data);
 
     return data;
   } catch (error) {
@@ -62,7 +62,7 @@ export async function getAllServices() {
 export async function getServiceById(id: Service["id"]) {
   try {
     const { data } = await api(`/app/services/${id}`);
-    console.log(id);
+    //console.log(id);
     if (!data) {
       throw new Error("Hubo un error de consulta");
     }
@@ -77,7 +77,7 @@ export async function getServiceByProfessionalId(id: Professional["id"]) {
   try {
     const { data } = await api(`/app/services/from/${id}`);
 
-    console.log(data);
+    //console.log(data);
 
     if (!data) {
       throw new Error("Hubo un error de consulta");
@@ -91,7 +91,7 @@ export async function getServiceByProfessionalId(id: Professional["id"]) {
 
 export async function updateService(formData: ServiceForm, id: Service["id"]) {
   try {
-    console.log(formData);
+    //console.log(formData);
 
     const result = ServiceSchemaAPI.safeParse({
       id,
@@ -105,8 +105,8 @@ export async function updateService(formData: ServiceForm, id: Service["id"]) {
       },
     });
 
-    console.log("result", result);
-    console.log(result.data);
+    //console.log("result", result);
+    //console.log(result.data);
     if (result.success) {
       const { data } = await api.put(
         `/app/services/update-service/${id}`,
@@ -123,7 +123,7 @@ export async function updateService(formData: ServiceForm, id: Service["id"]) {
 
 export async function deleteService(id: Service["id"]) {
   try {
-    console.log(id);
+    //console.log(id);
     await api.delete(`/app/services/${id}`);
   } catch (error) {
     console.log(error);

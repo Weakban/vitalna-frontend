@@ -189,6 +189,19 @@ export default function LoginView() {
                   <a href="/auth/register">Crear una</a>
                 </Button>
               </Box>
+
+              <Box textAlign="center" mt={2}>
+                <Button
+                  asChild
+                  variant="plain"
+                  size="sm"
+                  color={linkColor}
+                  fontWeight="semibold"
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  <a href="/auth/forgot-password">¿Olvidaste tu contraseña?</a>
+                </Button>
+              </Box>
             </Card.Footer>
           </Form>
         </Card.Root>

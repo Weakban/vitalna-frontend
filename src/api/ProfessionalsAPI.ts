@@ -21,7 +21,7 @@ export const getAvailableSlots = async (serviceId: number, date: Date) => {
 export async function getAllProfessionals() {
   try {
     const { data } = await api("/app/professionals");
-    console.log(data);
+    //console.log(data);
 
     return data;
   } catch (error) {
@@ -33,7 +33,7 @@ export async function getAllProfessionals() {
 export async function getProfessionalById(id: Professional["id"]) {
   try {
     const { data } = await api(`/app/professionals/${id}`);
-    console.log(data);
+    //console.log(data);
 
     return data;
   } catch (error) {

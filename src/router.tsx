@@ -39,6 +39,10 @@ import {
 import RequestNewTokenView, {
   action as requestNewToken,
 } from "./views/Auth/RequestNewTokenView";
+import ForgotPasswordView from "./views/Auth/ForgotPasswordView";
+import ResetPasswordView from "./views/Auth/ResetPasswordView";
+import NotFoundView from "./views/NotFoundView";
+import HydrateFallback from "./components/HydrateFallback";
 import PrivateLayout from "./layouts/PrivateLayout";
 import { RequireAuth } from "./components/Auth/RequireAuth";
 import { IsProfessional } from "./components/Auth/isProfessional";
@@ -70,11 +74,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
+    errorElement: <NotFoundView />,
+    HydrateFallback,
     children: [
       { index: true, element: <HomeView /> },
-
       {
-        //visual testing
         path: "testing",
         element: <ForceLightOnce />,
       },
@@ -84,48 +88,42 @@ export const router = createBrowserRouter([
   {
     path: "/app",
     element: <RequireAuth />,
+    errorElement: <NotFoundView />,
+    HydrateFallback,
     children: [
       {
         element: <PrivateLayout />,
         children: [
           {
-            //Mostrar servicios
             path: "services",
             element: <ServicesView />,
             loader: servicesLoader,
           },
           {
-            //Mostrar servicios
             path: "account",
             element: <ProfileView />,
             loader: profileLoader,
             action: profileAction,
           },
           {
-            //Mostrar servicios
             path: "professionals",
             element: <ProfessionalsView />,
             loader: professionalsLoader,
           },
           {
-            //Mostrar servicios
             path: "appointments",
             element: <AppointmentsView />,
             loader: AppointmentsLoader,
           },
           {
-            //Cancelar cita
             path: "appointments/:id/cancel",
             action: cancelAppointmentAction,
           },
           {
-            //Cancelar cita
             path: "appointments/:id/complete",
             action: completeAppointmentAction,
           },
-
           {
-            //Mostrar Información de un profesional
             path: "professionalInfo/:id",
             element: <ProfessionalInfoView />,
             loader: professionalInfoLoader,
@@ -165,40 +163,32 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            //Agendar servicio
             path: "booking/:id",
             element: <BookingView />,
             loader: bookingLoader,
             action: bookingAction,
           },
-
           {
             path: "professional",
             element: <IsProfessional />,
             children: [
               {
-                //Mostrar servicios
                 path: "myServices",
                 element: <MyServicesView />,
                 loader: myServicesLoader,
               },
-
               {
-                //Mostrar servicios
                 path: "myLeads",
                 element: <ProfessionnalLeadsView />,
                 loader: professionalsLeadLoader,
               },
               {
-                //Editar servicios
-                path: "services/:id/edit", //ROA pattern - Resource-oriented design
+                path: "services/:id/edit",
                 element: <EditServiceView />,
                 loader: editServiceLoader,
                 action: editServiceAction,
               },
-
               {
-                //delete
                 path: "services/:id/delete",
                 action: deleteServiceAction,
               },
@@ -207,7 +197,6 @@ export const router = createBrowserRouter([
                 element: <CreateServiceView />,
                 action: newServiceAction,
               },
-
               {
                 path: "schedule",
                 element: <ProfessionalScheduleView />,
@@ -224,20 +213,23 @@ export const router = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthLayout />,
+    errorElement: <NotFoundView />,
+    HydrateFallback,
     children: [
       {
         path: "register",
         element: <RegisterView />,
         action: newAccountAction,
       },
-
-      { path: "login", element: <LoginView />, action: loginAction },
       {
-        //visual testing
+        path: "login",
+        element: <LoginView />,
+        action: loginAction,
+      },
+      {
         path: "testing",
         element: <ForceLightOnce />,
       },
-
       {
         path: "confirm-account",
         element: <ConfirmAccountView />,
@@ -248,7 +240,20 @@ export const router = createBrowserRouter([
         element: <RequestNewTokenView />,
         action: requestNewToken,
       },
+      {
+        path: "forgot-password",
+        element: <ForgotPasswordView />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPasswordView />,
+      },
     ],
+  },
+
+  {
+    path: "*",
+    element: <NotFoundView />,
   },
 ]);
 

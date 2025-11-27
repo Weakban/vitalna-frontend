@@ -6,12 +6,12 @@ type UserData = {
 };
 
 async function setProfessional(formData: UserData) {
-  console.log("desde setProfesional", formData);
+  //console.log("desde setProfesional", formData);
   const { data } = await api.post("/app/auth/set-professional", formData);
   return data;
 }
 async function setClient(formData: UserData) {
-  console.log("desde setClient", formData);
+  //console.log("desde setClient", formData);
   const { data } = await api.post("/app/auth/set-client", formData);
   return data;
 }
@@ -19,9 +19,9 @@ async function setClient(formData: UserData) {
 //UserData si es con action y UserFormAction si es con RHF
 export async function createAccount(formData: UserData /*UserFormData */) {
   try {
-    console.log("la informacion recibida en la api es:", formData);
+    //console.log("la informacion recibida en la api es:", formData);
     const { data } = await api.post("/app/auth/create-account", formData);
-    console.log(data);
+    //console.log(data);
 
     if (formData.role === "PROFESSIONAL") {
       const data1 = await setProfessional(formData);
@@ -61,14 +61,14 @@ export async function login(formData: UserData /*UserFormData */) {
     const result = loginSchema.safeParse(formData);
 
     if (result.success) {
-      console.log(result.data);
+      //console.log(result.data);
       const { data } = await api.post("/app/auth/login", result.data);
 
-      console.log(data);
+      //console.log(data);
 
       return data;
     } else {
-      console.log(result.error.message);
+      //console.log(result.error.message);
       throw new Error(result.error.message);
     }
   } catch (error) {
@@ -84,7 +84,7 @@ export async function newToken(formData: UserData /*UserFormData */) {
     const result = emailOnlySchema.safeParse(formData);
 
     if (result.success) {
-      console.log(result.data);
+      //console.log(result.data);
       const { data } = await api.post("/app/auth/request-code", result.data);
 
       return data.data;
@@ -110,5 +110,51 @@ export async function getProfileData(sendData: string) {
   } catch (error) {
     const message = "Error al obtener informacion de usuario";
     throw new Error(message);
+  }
+}
+
+export async function forgotPassword(formData: UserData) {
+  try {
+    const result = emailOnlySchema.safeParse(formData);
+    if (result.success) {
+      const { data } = await api.post("/app/auth/forgot-password", result.data);
+      return data;
+    } else {
+      throw new Error(result.error.message);
+    }
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+    throw error instanceof Error ? error : new Error("Error desconocido");
+  }
+}
+
+export async function validatePasswordResetToken(formData: UserData) {
+  try {
+    const result = TokenConfirmSchema.safeParse(formData);
+    if (result.success) {
+      const { data } = await api.post("/app/auth/validate-token", result.data);
+      return data;
+    } else {
+      throw new Error(result.error.message);
+    }
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+    throw error instanceof Error ? error : new Error("Error desconocido");
+  }
+}
+
+export async function resetPassword(formData: UserData) {
+  try {
+    const { data } = await api.post("/app/auth/reset-password", formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+    throw error instanceof Error ? error : new Error("Error desconocido");
   }
 }

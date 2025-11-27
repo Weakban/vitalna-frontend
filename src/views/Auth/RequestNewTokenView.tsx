@@ -7,6 +7,9 @@ import {
   Heading,
   Input,
   Text,
+  Separator,
+  VStack,
+  Stack,
 } from "@chakra-ui/react";
 import { Form, useFetcher, type ActionFunctionArgs } from "react-router-dom";
 import Mesa from "../../assets/Mesa.jpg";
@@ -53,6 +56,9 @@ export default function RequestNewTokenView() {
   const fetcher = useFetcher();
   const headingColor = useColorModeValue("brand.ink", "white");
   const textColor = useColorModeValue("blackAlpha.700", "gray.200");
+  const labelColor = useColorModeValue("gray.700", "gray.200");
+  const linkColor = useColorModeValue("brand.Cblue", "brand.Cmint");
+  const inputBg = useColorModeValue("white", "gray.700");
 
   const {
     register,
@@ -69,80 +75,185 @@ export default function RequestNewTokenView() {
   };
 
   return (
-    <>
-      <Box
-        bgImage={`url(${Mesa})`}
-        bgPos="center"
-        bgSize="cover"
-        bgRepeat="no-repeat"
-        minH="100dvh"
-        display="grid"
-        placeItems="center"
-        px={4}
-        py={{ base: 8, md: 12 }}
+    <Box
+      bgImage={`url(${Mesa})`}
+      bgPos="center"
+      bgSize="cover"
+      bgRepeat="no-repeat"
+      minH="100dvh"
+      display="grid"
+      placeItems="center"
+      px={{ base: 3, md: 4 }}
+      py={{ base: 6, md: 12 }}
+    >
+      <Card.Root
+        w="full"
+        maxW={{ base: "95%", sm: "500px", md: "540px" }}
+        shadow="2xl"
+        rounded="3xl"
       >
-        <Card.Root w="full" maxW="520px" shadow="lg" rounded="2xl">
-          <Card.Header justifyContent="center" alignItems="center">
-            <Heading size="lg" color={headingColor}>
-              ¿Necesitas un codigo nuevo de confirmación?
-            </Heading>
-            <Text mt={1} color={textColor} fontSize="sm">
-              Ingresa tu correo electrónico
-            </Text>
-          </Card.Header>
-          {/**cuando agregamos el onSubmit ya no funciona el action */}
-          <Form
-            /* method="POST"
-            action="/auth/register"*/
-            onSubmit={handleSubmit(handleForm)}
-            noValidate
+        {/* Top Navigation */}
+        <Flex
+          justify="space-between"
+          gap={{ base: 2, md: 4 }}
+          px={{ base: 3, md: 4 }}
+          pt={{ base: 3, md: 4 }}
+          flexWrap="wrap"
+        >
+          <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
+            <a href="/">Página principal</a>
+          </Button>
+
+          <ColorModeButton size={{ base: "xs", md: "sm" }} />
+
+          <Button asChild size={{ base: "xs", md: "sm" }} variant="outline">
+            <a href="/">Ayuda</a>
+          </Button>
+        </Flex>
+
+        <Card.Header
+          justifyContent="center"
+          alignItems="center"
+          px={{ base: 4, md: 6 }}
+          pt={{ base: 4, md: 6 }}
+          pb={{ base: 2, md: 4 }}
+        >
+          <Heading
+            size={{ base: "md", md: "lg" }}
+            color={headingColor}
+            textAlign="center"
           >
-            <Card.Body>
+            Solicitar nuevo código
+          </Heading>
+          <Text
+            mt={{ base: 1, md: 2 }}
+            color={textColor}
+            fontSize={{ base: "xs", md: "sm" }}
+            textAlign="center"
+            px={{ base: 2, md: 0 }}
+          >
+            Ingresa tu correo electrónico para recibir un nuevo código de
+            confirmación
+          </Text>
+        </Card.Header>
+
+        <Form onSubmit={handleSubmit(handleForm)} noValidate>
+          <Card.Body px={{ base: 4, md: 6 }} py={{ base: 4, md: 6 }}>
+            <Stack gap={{ base: 4, md: 6 }}>
               <Field.Root invalid={!!errors.email}>
-                <Field.Label>Correo electrónico</Field.Label>
+                <Text
+                  fontSize={{ base: "xs", md: "sm" }}
+                  fontWeight="semibold"
+                  color={labelColor}
+                  mb={2}
+                >
+                  Correo electrónico
+                </Text>
                 <Input
                   id="email"
-                  placeholder="Introduce tu correo electrónico "
+                  type="email"
+                  placeholder="tu@gmail.com"
+                  size="lg"
+                  bg={inputBg}
+                  borderRadius="lg"
+                  _focus={{
+                    borderColor: "brand.Cblue",
+                    boxShadow: "0 0 0 1px #415380",
+                  }}
                   {...register("email", {
                     required: "El correo electrónico es obligatorio",
                   })}
                 />
-                <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
+                <Field.ErrorText fontSize="sm" mt={1}>
+                  {errors.email?.message}
+                </Field.ErrorText>
               </Field.Root>
-            </Card.Body>
 
-            <Card.Footer
-              justifyContent="center"
-              alignContent="center"
-              alignItems="center"
-              justifyItems="center"
-            >
+              {/* Info Box */}
+              <Box
+                bg={useColorModeValue("#AEE5D1", "#415380")}
+                p={3}
+                borderRadius="md"
+                borderLeft="4px solid"
+                borderColor="brand.Cblue"
+              >
+                <Text
+                  fontSize="xs"
+                  color={useColorModeValue("brand.ink", "white")}
+                  fontWeight="medium"
+                >
+                  Recibirás un código de 6 dígitos válido por 8 minutos
+                </Text>
+              </Box>
+            </Stack>
+          </Card.Body>
+
+          <Separator />
+
+          <Card.Footer
+            flexDirection="column"
+            gap={{ base: 3, md: 4 }}
+            px={{ base: 4, md: 6 }}
+            py={{ base: 4, md: 6 }}
+          >
+            <VStack gap={{ base: 2, md: 3 }} w="full">
               <Button
                 type="submit"
-                size="lg"
+                size={{ base: "md", md: "lg" }}
+                w="full"
                 bg="brand.Cblue"
                 color="white"
-                _hover={{ opacity: 0.9, bg: "brand.Cmint" }}
+                fontWeight="semibold"
+                _hover={{
+                  bg: "brand.Cmint",
+                  transform: "translateY(-1px)",
+                  shadow: "md",
+                }}
+                transition="all 0.2s"
               >
-                Solicitar
+                Solicitar código
               </Button>
-            </Card.Footer>
-          </Form>
-          <Flex justify="space-between" gap="4" paddingX={2}>
-            <Button size="xs" variant="outline">
-              <a href="/">Página principal</a>
-            </Button>
 
-            <ColorModeButton size="xs" />
+              <Box textAlign="center" w="full">
+                <Text
+                  fontSize={{ base: "xs", md: "sm" }}
+                  color={textColor}
+                  mb={2}
+                >
+                  ¿Ya tienes un código?
+                </Text>
+                <Button
+                  asChild
+                  size={{ base: "sm", md: "md" }}
+                  variant="outline"
+                  w="full"
+                  borderColor={linkColor}
+                  color={linkColor}
+                  _hover={{
+                    bg: linkColor,
+                    color: useColorModeValue("white", "brand.ink"),
+                  }}
+                >
+                  <a href="/auth/confirm-account">Confirmar cuenta</a>
+                </Button>
+              </Box>
 
-            <Button size="xs" variant="outline">
-              <a href="/">Ayuda</a>
-            </Button>
-          </Flex>
-        </Card.Root>
-      </Box>
-    </>
+              <Box textAlign="center" w="full" mt={2}>
+                <Button
+                  asChild
+                  variant="plain"
+                  size={{ base: "sm", md: "md" }}
+                  color={linkColor}
+                  fontWeight="semibold"
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  <a href="/auth/login">← Volver al inicio de sesión</a>
+                </Button>
+              </Box>
+            </VStack>
+          </Card.Footer>
+        </Form>
+      </Card.Root>
+    </Box>
   );
 }
-
-//<a href="/auth/confirm-account">Solicitar</a>
