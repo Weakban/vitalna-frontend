@@ -30,6 +30,7 @@ export async function loader() {
 
   return { appointments: [], mode: "client" as const };
 }
+//action function to cancel appointment
 
 export default function AppointmentsView() {
   const { appointments, mode } = useLoaderData() as {

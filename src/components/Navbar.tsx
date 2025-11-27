@@ -22,7 +22,7 @@ import {
 } from "react-icons/fi";
 
 import Vblue from "../assets/VBlue.svg";
-import { ColorModeButton } from "./ui/color-mode";
+import { ColorModeButton, useColorModeValue } from "./ui/color-mode";
 
 const NAV_ITEMS = [
   { label: "¿Quiénes somos?", to: "#quienes-somos" },
@@ -32,14 +32,23 @@ const NAV_ITEMS = [
 export default function Navbar() {
   const { open, onToggle } = useDisclosure();
 
+  const bgColor = useColorModeValue("white", "gray.800");
+  const borderColor = useColorModeValue("gray.200", "gray.700");
+  const linkColor = useColorModeValue("gray.700", "gray.200");
+  const linkHoverColor = useColorModeValue("brand.Cblue", "brand.Cmint");
+  const mobileMenuBg = useColorModeValue("white", "gray.800");
+  const mobileLinkHover = useColorModeValue("gray.100", "gray.700");
+
   return (
     <Box
       as="header"
       position="sticky"
       top={0}
       zIndex={50}
-      bg="bg.muted"
+      bg={bgColor}
       boxShadow="sm"
+      borderBottomWidth="1px"
+      borderColor={borderColor}
     >
       <Container maxW="8xl" px={{ base: 4, md: 6 }}>
         <Flex h={{ base: 16, md: 14 }} align="center" justify="space-between">
@@ -59,10 +68,10 @@ export default function Navbar() {
               <Link
                 key={item.to}
                 href={item.to}
-                color="fg.default"
+                color={linkColor}
                 fontWeight="medium"
                 fontSize={{ base: "sm", xl: "md" }}
-                _hover={{ color: "brand.Cmint" }}
+                _hover={{ color: linkHoverColor }}
                 transition="color 0.2s"
               >
                 {item.label}
@@ -76,7 +85,8 @@ export default function Navbar() {
               aria-label="Facebook"
               variant="ghost"
               size="sm"
-              _hover={{ color: "brand.Cmint" }}
+              color={linkColor}
+              _hover={{ color: linkHoverColor }}
             >
               <FiFacebook />
             </IconButton>
@@ -84,7 +94,8 @@ export default function Navbar() {
               aria-label="Instagram"
               variant="ghost"
               size="sm"
-              _hover={{ color: "brand.Cmint" }}
+              color={linkColor}
+              _hover={{ color: linkHoverColor }}
             >
               <FiInstagram />
             </IconButton>
@@ -92,7 +103,8 @@ export default function Navbar() {
               aria-label="Twitter/X"
               variant="ghost"
               size="sm"
-              _hover={{ color: "brand.Cmint" }}
+              color={linkColor}
+              _hover={{ color: linkHoverColor }}
             >
               <FiTwitter />
             </IconButton>
@@ -127,6 +139,7 @@ export default function Navbar() {
               aria-label="Menu"
               variant="ghost"
               size="md"
+              color={linkColor}
             >
               {open ? <FiX size={24} /> : <FiMenu size={24} />}
             </IconButton>
@@ -136,7 +149,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <Collapsible.Root open={open}>
           <Collapsible.Content>
-            <Box pb={4} pt={2} display={{ lg: "none" }}>
+            <Box pb={4} pt={2} display={{ lg: "none" }} bg={mobileMenuBg}>
               <VStack gap={3} align="stretch">
                 {/* Navigation Links */}
                 {NAV_ITEMS.map((item) => (
@@ -147,7 +160,8 @@ export default function Navbar() {
                     px={3}
                     borderRadius="md"
                     fontWeight="medium"
-                    _hover={{ bg: "bg.subtle", color: "brand.Cmint" }}
+                    color={linkColor}
+                    _hover={{ bg: mobileLinkHover, color: linkHoverColor }}
                     transition="all 0.2s"
                   >
                     {item.label}
@@ -160,7 +174,8 @@ export default function Navbar() {
                     aria-label="Facebook"
                     variant="ghost"
                     size="sm"
-                    _hover={{ color: "brand.Cmint" }}
+                    color={linkColor}
+                    _hover={{ color: linkHoverColor }}
                   >
                     <FiFacebook />
                   </IconButton>
@@ -168,7 +183,8 @@ export default function Navbar() {
                     aria-label="Instagram"
                     variant="ghost"
                     size="sm"
-                    _hover={{ color: "brand.Cmint" }}
+                    color={linkColor}
+                    _hover={{ color: linkHoverColor }}
                   >
                     <FiInstagram />
                   </IconButton>
@@ -176,7 +192,8 @@ export default function Navbar() {
                     aria-label="Twitter/X"
                     variant="ghost"
                     size="sm"
-                    _hover={{ color: "brand.Cmint" }}
+                    color={linkColor}
+                    _hover={{ color: linkHoverColor }}
                   >
                     <FiTwitter />
                   </IconButton>
@@ -187,7 +204,7 @@ export default function Navbar() {
                   gap={2}
                   pt={2}
                   borderTop="1px solid"
-                  borderColor="border.subtle"
+                  borderColor={borderColor}
                 >
                   <Button
                     asChild
@@ -202,9 +219,15 @@ export default function Navbar() {
                     asChild
                     variant="outline"
                     w="full"
-                    borderColor="brand.Cblue"
-                    color="brand.Cblue"
-                    _hover={{ bg: "brand.Cblue", color: "white" }}
+                    borderColor={useColorModeValue(
+                      "brand.Cblue",
+                      "brand.Cmint"
+                    )}
+                    color={useColorModeValue("brand.Cblue", "brand.Cmint")}
+                    _hover={{
+                      bg: useColorModeValue("brand.Cblue", "brand.Cmint"),
+                      color: useColorModeValue("white", "brand.ink"),
+                    }}
                   >
                     <a href="/auth/login">Iniciar Sesión</a>
                   </Button>

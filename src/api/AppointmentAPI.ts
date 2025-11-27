@@ -1,3 +1,4 @@
+import { Appointment } from "@/types";
 import api from "./axios";
 
 export const getAvailableSlots = async (serviceId: number, date: Date) => {
@@ -75,6 +76,26 @@ export async function getAllAppointments() {
   } catch (error) {
     const message = "Error al obtener las citas";
     throw new Error(message);
+  }
+}
+
+//CaNCELAR CITA
+export async function cancelAppointment(id: Appointment["id"]) {
+  try {
+    console.log(id);
+    await api.patch(`/app/appointments/${id}/cancel`, { status: "CANCELLED" });
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function completeAppointment(id: Appointment["id"]) {
+  try {
+    console.log(id);
+    await api.patch(`/app/appointments/${id}/complete`, {
+      status: "COMPLETED",
+    });
+  } catch (error) {
+    console.log(error);
   }
 }
 

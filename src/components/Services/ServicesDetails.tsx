@@ -26,7 +26,7 @@ type ServiceDetailsProps = {
   mode: "all" | "mine";
 };
 
-export async function delteAction({ params }: ActionFunctionArgs) {
+export async function deleteAction({ params }: ActionFunctionArgs) {
   if (params.id !== undefined) {
     await deleteService(+params.id);
     return redirect("/app/services");

@@ -25,7 +25,11 @@ import EditServiceView, {
   action as editServiceAction,
 } from "./views/Services/EditServiceView";
 import { ForceLightOnce } from "./views/ViewsTesting";
-import { delteAction as deleteServiceAction } from "./components/Services/ServicesDetails";
+import { deleteAction as deleteServiceAction } from "./components/Services/ServicesDetails";
+import {
+  cancelAppointmentAction,
+  completeAppointmentAction,
+} from "./components/AppointmentDetails";
 import RequestNewTokenView, {
   action as requestNewToken,
 } from "./views/Auth/RequestNewTokenView";
@@ -95,6 +99,16 @@ export const router = createBrowserRouter([
             path: "appointments",
             element: <AppointmentsView />,
             loader: AppointmentsLoader,
+          },
+          {
+            //Cancelar cita
+            path: "appointments/:id/cancel",
+            action: cancelAppointmentAction,
+          },
+          {
+            //Cancelar cita
+            path: "appointments/:id/complete",
+            action: completeAppointmentAction,
           },
 
           {

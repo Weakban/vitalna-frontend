@@ -174,32 +174,18 @@ export async function getAvailableTimesForDate(
 ): Promise<string[]> {
   try {
     const url = `/app/availability/professional/${professionalId}/times`;
-    console.log("🌐 Making API request to:", url);
-    console.log("📅 With date param:", date);
-    console.log(
-      "🔑 With token:",
-      token ? token.substring(0, 20) + "..." : "null"
-    );
-
     const config = {
       params: { date },
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-    console.log("⚙️ Request config:", config);
+    console.log("Request config:", config);
 
     const response = await api.get(url, config);
-    console.log("✅ API Response received:", response);
-    console.log("📊 Response data:", response.data);
-    console.log("📈 Response status:", response.status);
 
     return response.data;
   } catch (error: any) {
-    console.error("💥 API Error:", error);
-    console.error("📋 Error response:", error.response?.data);
-    console.error("📊 Error status:", error.response?.status);
-    console.error("📝 Error message:", error.message);
     throw new Error("Error al obtener los horarios disponibles.");
   }
 }

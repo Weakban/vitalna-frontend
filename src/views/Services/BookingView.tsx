@@ -43,7 +43,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
     if (params.id === undefined) {
       throw new Error("ID del servicio no proporcionado");
     }
-
     const serviceId = +params.id;
     const formData = await request.formData();
 
@@ -229,7 +228,7 @@ export default function BookingPage() {
 
       try {
         console.log(
-          "🚀 Fetching times for professional:",
+          " Fetching times for professional:",
           service.provider.id,
           "date:",
           date.toDateString()
@@ -239,10 +238,10 @@ export default function BookingPage() {
           date,
           token
         );
-        console.log("✅ Times received:", times);
-        console.log("📊 Number of available times:", times.length);
+        console.log("Times received:", times);
+        console.log("Number of available times:", times.length);
         setAvailableTimes(times);
-        console.log("💾 Available times state updated");
+        console.log("Available times state updated");
       } catch (error) {
         console.error("❌ Error al cargar horarios:", error);
         setAvailableTimes([]);
@@ -333,7 +332,7 @@ export default function BookingPage() {
                 console.log("Value received:", value, "Type:", typeof value);
 
                 if (value instanceof Date) {
-                  console.log("✅ Valid date selected:", value.toDateString());
+                  console.log(" Valid date selected:", value.toDateString());
                   setSelectedDate(value);
                   handleDateChange(value);
                 } else if (Array.isArray(value) && value[0] instanceof Date) {
@@ -344,7 +343,7 @@ export default function BookingPage() {
                   setSelectedDate(value[0]);
                   handleDateChange(value[0]);
                 } else {
-                  console.log("❌ Invalid value received:", value);
+                  console.log(" Invalid value received:", value);
                 }
               }}
               value={selectedDate}
@@ -453,39 +452,3 @@ export default function BookingPage() {
     </Box>
   );
 }
-
-/*
-
-          Debug Info 
-          <Box bg="yellow.100" p={4} borderRadius="md" fontSize="sm">
-            <Text>
-              <strong>Debug Info:</strong>
-            </Text>
-            <Text>
-              🗓️ Selected Date:{" "}
-              {selectedDate ? selectedDate.toDateString() : "null"}
-            </Text>
-            <Text>🔄 Loading Times: {isLoadingTimes ? "Yes" : "No"}</Text>
-            <Text>📊 Available Times: {availableTimes.length} items</Text>
-            <Text>📋 Times Array: [{availableTimes.join(", ")}]</Text>
-            <Text>👨‍⚕️ Professional ID: {service?.provider?.id || "null"}</Text>
-            <Text>🏥 Service ID: {service?.id || "null"}</Text>
-            <Text>� Service Name: {service?.name || "null"}</Text>
-            <Text>�🔑 Token: {token ? "Present" : "Missing"}</Text>
-            <Text>
-              📦 Service Keys:{" "}
-              {service ? JSON.stringify(Object.keys(service)) : "null"}
-            </Text>
-            <Button
-              size="sm"
-              colorScheme="blue"
-              onClick={() => {
-                console.log("🔍 Full Service Object:", service);
-                handleDateChange(selectedDate);
-              }}
-              mt={2}
-            >
-              🔄 Forzar Carga de Horarios
-            </Button>
-          </Box>
-*/

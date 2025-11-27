@@ -14,6 +14,7 @@ import { useColorModeValue } from "@/components/ui/color-mode";
 import { formatCurrency } from "@/utils";
 import { FiCalendar, FiClock, FiUser, FiFileText } from "react-icons/fi";
 import { Form, redirect, type ActionFunctionArgs } from "react-router-dom";
+import { cancelAppointment, completeAppointment } from "@/api/AppointmentAPI";
 
 type AppointmentDetailsProps = {
   appointment: Appointment;
@@ -23,7 +24,17 @@ type AppointmentDetailsProps = {
 export async function cancelAppointmentAction({ params }: ActionFunctionArgs) {
   // TODO: Implementar lógica para cancelar cita
   if (params.id !== undefined) {
-    // await cancelAppointment(+params.id);
+    await cancelAppointment(+params.id);
+    return redirect("/app/appointments");
+  }
+}
+
+export async function completeAppointmentAction({
+  params,
+}: ActionFunctionArgs) {
+  // TODO: Implementar lógica para cancelar cita
+  if (params.id !== undefined) {
+    await completeAppointment(+params.id);
     return redirect("/app/appointments");
   }
 }
@@ -211,17 +222,33 @@ export default function AppointmentDetails({
               <>
                 {appointment.status === "RESERVED" && (
                   <>
-                    <Button
-                      bg="green.500"
-                      color="white"
-                      _hover={{ bg: "green.600" }}
-                      size={{ base: "sm", md: "md" }}
+                    <Form
+                      method="post"
+                      action={`/app/appointments/${appointment.id}/complete`}
+                      onSubmit={(e) => {
+                        if (
+                          !confirm("¿Quieres marcar esta cita como completada?")
+                        ) {
+                          e.preventDefault();
+                        }
+                      }}
                     >
-                      Marcar Completada
-                    </Button>
+                      <Button
+                        width="100%"
+                        bg="green.500"
+                        type="submit"
+                        color="white"
+                        _hover={{ bg: "green.600" }}
+                        size={{ base: "sm", md: "md" }}
+                      >
+                        Marcar Completada
+                      </Button>
+                    </Form>
+
                     <Button
                       bg="orange.500"
                       color="white"
+                      type="submit"
                       _hover={{ bg: "orange.600" }}
                       size={{ base: "sm", md: "md" }}
                     >
