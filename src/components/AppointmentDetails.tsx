@@ -13,7 +13,12 @@ import {
 import { useColorModeValue } from "@/components/ui/color-mode";
 import { formatCurrency } from "@/utils";
 import { FiCalendar, FiClock, FiUser, FiFileText } from "react-icons/fi";
-import { Form, redirect, type ActionFunctionArgs } from "react-router-dom";
+import {
+  Form,
+  redirect,
+  useNavigate,
+  type ActionFunctionArgs,
+} from "react-router-dom";
 import { cancelAppointment, completeAppointment } from "@/api/AppointmentAPI";
 
 type AppointmentDetailsProps = {
@@ -44,6 +49,7 @@ export default function AppointmentDetails({
   mode,
 }: AppointmentDetailsProps) {
   const iconColor = useColorModeValue("gray.700", "gray.300");
+  const navigate = useNavigate();
 
   // Formatear fecha y hora
   const appointmentDate = new Date(appointment.appointmentDate);
@@ -246,11 +252,19 @@ export default function AppointmentDetails({
                     </Form>
 
                     <Button
+                      width="100%"
                       bg="orange.500"
                       color="white"
-                      type="submit"
                       _hover={{ bg: "orange.600" }}
                       size={{ base: "sm", md: "md" }}
+                      onClick={() =>
+                        navigate(
+                          `/app/appointments/${appointment.id}/reschedule`,
+                          {
+                            state: { appointment, mode },
+                          }
+                        )
+                      }
                     >
                       Reprogramar
                     </Button>
@@ -283,17 +297,6 @@ export default function AppointmentDetails({
             ) : (
               // Vista para cliente
               <>
-                {appointment.status === "RESERVED" && (
-                  <Button
-                    bg="orange.500"
-                    color="white"
-                    _hover={{ bg: "orange.600" }}
-                    size={{ base: "sm", md: "md" }}
-                  >
-                    Reprogramar
-                  </Button>
-                )}
-
                 {appointment.status === "COMPLETED" && (
                   <Button
                     bg="brand.Cblue"
@@ -306,26 +309,46 @@ export default function AppointmentDetails({
                 )}
 
                 {appointment.status === "RESERVED" && (
-                  <Form
-                    method="post"
-                    action={`/app/appointments/${appointment.id}/cancel`}
-                    onSubmit={(e) => {
-                      if (!confirm("¿Estás seguro de cancelar esta cita?")) {
-                        e.preventDefault();
-                      }
-                    }}
-                  >
+                  <>
                     <Button
                       width="100%"
-                      bg="red.500"
+                      bg="orange.500"
                       color="white"
-                      type="submit"
-                      _hover={{ bg: "red.600" }}
+                      _hover={{ bg: "orange.600" }}
                       size={{ base: "sm", md: "md" }}
+                      onClick={() =>
+                        navigate(
+                          `/app/appointments/${appointment.id}/reschedule`,
+                          {
+                            state: { appointment, mode },
+                          }
+                        )
+                      }
                     >
-                      Cancelar
+                      Reprogramar
                     </Button>
-                  </Form>
+
+                    <Form
+                      method="post"
+                      action={`/app/appointments/${appointment.id}/cancel`}
+                      onSubmit={(e) => {
+                        if (!confirm("¿Estás seguro de cancelar esta cita?")) {
+                          e.preventDefault();
+                        }
+                      }}
+                    >
+                      <Button
+                        width="100%"
+                        bg="red.500"
+                        color="white"
+                        type="submit"
+                        _hover={{ bg: "red.600" }}
+                        size={{ base: "sm", md: "md" }}
+                      >
+                        Cancelar
+                      </Button>
+                    </Form>
+                  </>
                 )}
               </>
             )}

@@ -79,7 +79,7 @@ export async function getAllAppointments() {
   }
 }
 
-//CaNCELAR CITA
+//CANCELAR CITA
 export async function cancelAppointment(id: Appointment["id"]) {
   try {
     console.log(id);
@@ -88,6 +88,8 @@ export async function cancelAppointment(id: Appointment["id"]) {
     console.log(error);
   }
 }
+
+//COMPLETAR CITA
 export async function completeAppointment(id: Appointment["id"]) {
   try {
     console.log(id);
@@ -96,6 +98,28 @@ export async function completeAppointment(id: Appointment["id"]) {
     });
   } catch (error) {
     console.log(error);
+  }
+}
+
+//REPROGRAMAR CITA
+export async function rescheduleAppointment(
+  id: Appointment["id"],
+  rescheduleData: {
+    date: string; // Formato YYYY-MM-DD
+    startTime: string; // Formato HH:MM
+  }
+) {
+  try {
+    const { data } = await api.patch(
+      `/app/appointments/${id}/reschedule`,
+      rescheduleData
+    );
+    return data;
+  } catch (error: any) {
+    if (error.response?.data?.error) {
+      throw new Error(error.response.data.error);
+    }
+    throw new Error("Error al reprogramar la cita");
   }
 }
 

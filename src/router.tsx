@@ -69,6 +69,7 @@ import ProfessionalScheduleView, {
 import AppointmentsView, {
   loader as AppointmentsLoader,
 } from "./views/AppointmentsView";
+import RescheduleAppointmentView from "./views/RescheduleAppointmentView";
 
 export const router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ export const router = createBrowserRouter([
           {
             path: "appointments/:id/complete",
             action: completeAppointmentAction,
+          },
+          {
+            path: "appointments/:id/reschedule",
+            element: <RescheduleAppointmentView />,
           },
           {
             path: "professionalInfo/:id",
