@@ -5,7 +5,7 @@ const RoleEnum = z.enum(["CLIENT", "PROFESSIONAL"]);
 export const userSchema = z.object({
   id: z.number(),
   name: z.string(),
-  email: z.string(),
+  email: z.string().trim().toLowerCase(),
   password: z.string(),
   password_confirmation: z.string(),
   role: RoleEnum,
@@ -26,7 +26,7 @@ export type UserT = z.infer<typeof userSchema>;
 export const loginSchema = userSchema.pick({ email: true, password: true });
 
 export const emailOnlySchema = z.object({
-  email: z.email("Correo electrónico inválido"),
+  email: z.string().trim().toLowerCase().email("Correo electrónico inválido"),
 });
 
 export type emailOnlyForm = z.infer<typeof emailOnlySchema>;
