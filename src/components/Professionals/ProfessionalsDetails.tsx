@@ -41,7 +41,13 @@ export default function ProfessionalCard({
       <VStack p={6} gap={4} align="stretch" flex="1">
         {/* Encabezado con Avatar y Nombre */}
         <VStack gap={4}>
-          <Avatar.Root size="xl">
+          <Avatar.Root
+            bg={{
+              base: "brand.Cmint",
+              _dark: "brand.Cblue",
+            }}
+            size="xl"
+          >
             <Avatar.Fallback name={professional.user.name} />
             <Avatar.Image src="https://bit.ly/dan-abramov" />
           </Avatar.Root>
@@ -61,19 +67,17 @@ export default function ProfessionalCard({
         </Text>
         <Spacer /> {/* Este componente empuja el botón hacia abajo */}
         {/* Botón de Acción */}
-        <Button asChild>
+        <Button
+          bg={{
+            base: "brand.Cblue",
+            _dark: "brand.Cmint",
+          }}
+          _hover={{ opacity: 0.9, bg: "brand.Cmint" }}
+          asChild
+        >
           <a href={`/app/professionalInfo/${professional.id}`}>Ver perfil</a>
         </Button>
       </VStack>
     </GridItem>
   );
 }
-
-/*
-  <Button
-          width="100%"
-          onClick={() => navigate(`/app/professionalInfo/${professional.id}`)}
-        >
-          Ver perfil
-        </Button>
-        */

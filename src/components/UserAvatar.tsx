@@ -53,6 +53,11 @@ export default function UserAvatar() {
     );
   };
 
+  // Determinar colorPalette según rol
+  const getAvatarColorPalette = () => {
+    return profile.role === "PROFESSIONAL" ? "brandBlue" : "brandMint";
+  };
+
   return (
     <Box
       px={3}
@@ -65,8 +70,12 @@ export default function UserAvatar() {
       <VStack gap={3} align="stretch">
         {/* User Info */}
         <HStack gap={3} align="center">
-          <Avatar.Root shape="rounded" size="lg" bg="brand.Cblue">
-            <Avatar.Fallback name={profile.name} color="white" />
+          <Avatar.Root
+            shape="rounded"
+            size="lg"
+            colorPalette={getAvatarColorPalette()}
+          >
+            <Avatar.Fallback name={profile.name} />
           </Avatar.Root>
 
           <VStack flex="1" align="flex-start" gap={1} minW={0}>

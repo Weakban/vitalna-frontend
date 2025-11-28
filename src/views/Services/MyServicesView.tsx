@@ -8,6 +8,8 @@ import { useLoaderData } from "react-router-dom";
 import { IoMdAdd } from "react-icons/io";
 import { useAuthStore } from "@/store/auth";
 import { useColorModeValue } from "@/components/ui/color-mode";
+import { useState, useMemo } from "react";
+
 //const { profile } = useAuthStore.getState();
 export async function loader() {
   const id = useAuthStore.getState().profile.professionalId;
@@ -23,6 +25,55 @@ export default function MyServicesView() {
   const textColor = useColorModeValue("blackAlpha.700", "gray.300");
   const mutedColor = useColorModeValue("gray.500", "gray.400");
 
+  // Estados para filtros
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
+  const [selectedSort, setSelectedSort] = useState("newest");
+
+  // Filtrado y ordenamiento de servicios
+  const filteredAndSortedServices = useMemo(() => {
+    let filtered = [...services];
+
+    // Filtrar por término de búsqueda
+    if (searchTerm.trim()) {
+      const searchLower = searchTerm.toLowerCase();
+      filtered = filtered.filter(
+        (service) =>
+          service.name.toLowerCase().includes(searchLower) ||
+          service.description.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Filtrar por categoría
+    if (selectedCategory !== "ALL") {
+      filtered = filtered.filter(
+        (service) => service.category.name === selectedCategory
+      );
+    }
+
+    // Ordenar
+    switch (selectedSort) {
+      case "name-asc":
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name-desc":
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "price-asc":
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+      default:
+        filtered.sort((a, b) => b.id - a.id);
+        break;
+    }
+
+    return filtered;
+  }, [services, searchTerm, selectedCategory, selectedSort]);
+
   return (
     <>
       <Box bg={bgColor} minH="100vh">
@@ -34,9 +85,15 @@ export default function MyServicesView() {
             </Text>
             <Text color={textColor}>Administra tus servicios.</Text>
           </Stack>
-          <SearchServiceForm />
 
-          {/* AGREGA EL CÓDIGO AQUÍ */}
+          <SearchServiceForm
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+            selectedSort={selectedSort}
+            onSortChange={setSelectedSort}
+          />
 
           <Box my={6}>
             <Button
@@ -55,12 +112,25 @@ export default function MyServicesView() {
           </Box>
 
           {services && services.length > 0 ? (
-            // Si la condición es VERDADERA (hay servicios en el arreglo)
-            services.map((service) => (
-              <ServicesDetails key={service.id} service={service} mode="mine" />
-            ))
+            filteredAndSortedServices.length === 0 ? (
+              <Text
+                fontStyle="italic"
+                color={mutedColor}
+                textAlign="center"
+                py={6}
+              >
+                No se encontraron servicios con los filtros seleccionados.
+              </Text>
+            ) : (
+              filteredAndSortedServices.map((service) => (
+                <ServicesDetails
+                  key={service.id}
+                  service={service}
+                  mode="mine"
+                />
+              ))
+            )
           ) : (
-            // Si la condición es FALSA (el arreglo es nulo, indefinido o está vacío)
             <Text fontStyle="italic" color={mutedColor}>
               Todavía no tienes servicios agregados
             </Text>
