@@ -166,12 +166,14 @@ export default function ServicesDetails({
                   >
                     Reservar
                   </Button>
+                  {/* 
                   <Checkbox.Root size={{ base: "md", md: "lg" }}>
                     <Checkbox.Control />
                     <Checkbox.Label fontSize={{ base: "sm", md: "md" }}>
                       Favorito
                     </Checkbox.Label>
                   </Checkbox.Root>
+                  */}
                 </>
               )}
             </VStack>
