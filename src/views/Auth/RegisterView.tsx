@@ -20,17 +20,17 @@ export async function action({ request }: ActionFunctionArgs) {
         description: "Un momento por favor",
       },
       success: (data) => ({
-        title: data,
-        description: "Registro exitoso",
+        title: "Registro exitoso",
+        description: Array.isArray(data) ? data[0] : data,
       }),
-      error: (data) => ({
+      error: (error: any) => ({
         title: "No se pudo registrar",
-        description: data,
+        description: error.message || "Error al crear la cuenta",
       }),
     });
   } catch (e: any) {
     const msg =
-      e?.response?.data?.message ?? e?.message ?? "No se pudo crear la cuenta";
+      e?.response?.data?.error ?? e?.message ?? "No se pudo crear la cuenta";
     return msg;
   }
   return;

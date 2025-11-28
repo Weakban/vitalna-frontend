@@ -32,8 +32,13 @@ export async function createAccount(formData: UserData /*UserFormData */) {
       const data1 = await setClient(formData);
       return [data, data1];
     }
+
+    return data;
   } catch (error) {
-    console.log(error);
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+    throw error instanceof Error ? error : new Error("Error desconocido");
   }
 }
 

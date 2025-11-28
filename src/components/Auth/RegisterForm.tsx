@@ -72,9 +72,14 @@ export default function RegisterForm({
         <Field.Label>Correo electrónico</Field.Label>
         <Input
           id="email"
+          type="email"
           placeholder="Introduce tu correo electrónico "
           {...register("email", {
             required: "El correo electrónico es obligatorio",
+            pattern: {
+              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "El formato del correo electrónico no es válido",
+            },
           })}
         />
         <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
