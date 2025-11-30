@@ -29,7 +29,7 @@ export default function ProfessionalsView() {
             </Text>
             <Text color={textColor}>
               Encuentra a los profesionales de salud y belleza que conforman
-              vitalá.
+              vitalná.
             </Text>
           </Stack>
           {/*<SearchServiceForm />*/}

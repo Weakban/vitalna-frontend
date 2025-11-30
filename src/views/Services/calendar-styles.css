@@ -42,6 +42,21 @@
   font-size: 12px !important;
 }
 
+/* Mostrar solo las iniciales de los días en móvil */
+.vitalna-calendar .react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none !important;
+}
+
+@media (max-width: 640px) {
+  .vitalna-calendar .react-calendar__month-view__weekdays__weekday abbr {
+    font-size: 10px !important;
+  }
+
+  .vitalna-calendar .react-calendar__month-view__weekdays__weekday abbr[title] {
+    text-decoration: none !important;
+  }
+}
+
 .vitalna-calendar .react-calendar__month-view__days {
   display: grid !important;
   grid-template-columns: repeat(7, 1fr) !important;
@@ -59,6 +74,43 @@
   margin: 2px !important;
   transition: all 0.2s ease !important;
   color: #2d3748 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 40px !important;
+}
+
+/* Estilos responsivos para móvil */
+@media (max-width: 640px) {
+  .vitalna-calendar {
+    padding: 8px !important;
+  }
+
+  .vitalna-calendar .react-calendar__navigation button {
+    min-width: 36px !important;
+    padding: 6px !important;
+    font-size: 12px !important;
+  }
+
+  .vitalna-calendar .react-calendar__month-view__weekdays__weekday {
+    padding: 4px 2px !important;
+    font-size: 11px !important;
+  }
+
+  .vitalna-calendar .react-calendar__tile {
+    padding: 8px 4px !important;
+    font-size: 13px !important;
+    margin: 1px !important;
+    min-height: 36px !important;
+  }
+
+  .vitalna-calendar .react-calendar__month-view__days {
+    gap: 1px !important;
+  }
+
+  .vitalna-calendar .react-calendar__month-view__weekdays {
+    gap: 1px !important;
+  }
 }
 
 .vitalna-calendar .react-calendar__tile:hover:not(:disabled) {

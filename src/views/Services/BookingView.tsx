@@ -354,6 +354,20 @@ export default function BookingPage() {
               next2Label={null}
               prev2Label={null}
               className="vitalna-calendar"
+              formatShortWeekday={(_locale, date) => {
+                const isMobile = window.innerWidth < 640;
+                const days = ["D", "L", "M", "M", "J", "V", "S"];
+                const fullDays = [
+                  "DOM",
+                  "LUN",
+                  "MAR",
+                  "MIÉ",
+                  "JUE",
+                  "VIE",
+                  "SÁB",
+                ];
+                return isMobile ? days[date.getDay()] : fullDays[date.getDay()];
+              }}
             />
           </Box>
 
