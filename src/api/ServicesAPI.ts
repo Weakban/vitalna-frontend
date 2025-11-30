@@ -80,12 +80,13 @@ export async function getServiceByProfessionalId(id: Professional["id"]) {
     //console.log(data);
 
     if (!data) {
-      throw new Error("Hubo un error de consulta");
+      return [];
     }
 
     return data;
   } catch (error) {
     console.log(error);
+    return [];
   }
 }
 

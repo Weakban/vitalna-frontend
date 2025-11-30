@@ -18,7 +18,8 @@ export async function loader() {
 }
 
 export default function MyServicesView() {
-  const services = useLoaderData() as Service[];
+  const servicesData = useLoaderData() as Service[];
+  const services = Array.isArray(servicesData) ? servicesData : [];
 
   const bgColor = useColorModeValue("bg.canvas", "bg.canvas");
   const headingColor = useColorModeValue("brand.ink", "white");
