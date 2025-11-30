@@ -39,8 +39,8 @@ export default function CreateServiceView() {
   const initialValues: serviceFormData = {
     name: "",
     description: "",
-    price: +"",
-    durationMin: +"",
+    price: "" as any,
+    durationMin: "" as any,
     CategoryId: 1,
     isActive: true,
   };
