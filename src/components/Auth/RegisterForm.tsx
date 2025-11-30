@@ -159,7 +159,9 @@ export default function RegisterForm({
                 >
                   {GENDER_ITEMS.items.map((item) => (
                     <SegmentGroup.Item key={item.value} value={item.value}>
-                      <SegmentGroup.ItemText>{item.label}</SegmentGroup.ItemText>
+                      <SegmentGroup.ItemText>
+                        {item.label}
+                      </SegmentGroup.ItemText>
                       <SegmentGroup.ItemHiddenInput />
                     </SegmentGroup.Item>
                   ))}
@@ -208,7 +210,7 @@ export default function RegisterForm({
             <Field.Label>Especialidad</Field.Label>
             <Input
               id="specialty"
-              placeholder="introduce tu numero telefónico "
+              placeholder="introduce tu especialidad "
               {...register("specialty", {
                 required: "La especialidad es obligatoria",
               })}
@@ -220,7 +222,7 @@ export default function RegisterForm({
             <Field.Label>Biografía</Field.Label>
             <Input
               id="bio"
-              placeholder="introduce tu numero telefónico "
+              placeholder="introduce tu biografía "
               {...register("bio", {
                 required: "La biografía es obligatoria",
               })}

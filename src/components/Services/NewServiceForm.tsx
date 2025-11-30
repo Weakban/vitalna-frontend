@@ -24,11 +24,6 @@ export default function RegisterForm({
     { label: "Belleza", value: "2" },
   ];
 
-  const availabilityOptions = [
-    { label: "Disponible", value: "true" },
-    { label: "No disponible", value: "false" },
-  ];
-
   return (
     <Stack gap="4" align="flex-start" maxW="sm">
       <Controller
@@ -57,9 +52,9 @@ export default function RegisterForm({
         <Field.Label>Nombre del servicio</Field.Label>
         <Input
           id="name"
-          placeholder="Introduce tu nombre completo"
+          placeholder="Introduce el nombre del servicio"
           {...register("name", {
-            required: "El nombre es obligatorio",
+            required: "El nombre del servicio es obligatorio",
           })}
         />
 
@@ -70,58 +65,39 @@ export default function RegisterForm({
         <Field.Label>Precio en pesos mexicanos</Field.Label>
         <Input
           id="price"
-          placeholder="Introduce tu correo electrónico "
+          type="number"
+          placeholder="Introduce el precio del servicio"
           {...register("price", {
-            required: "El correo electrónico es obligatorio",
+            required: "El precio es obligatorio",
           })}
         />
-        <Field.ErrorText>{errors.description?.message}</Field.ErrorText>
+        <Field.ErrorText>{errors.price?.message}</Field.ErrorText>
       </Field.Root>
 
       <Field.Root invalid={!!errors.durationMin}>
         <Field.Label>Duración en minutos</Field.Label>
         <Input
           id="durationMin"
-          placeholder="Introduce tu correo electrónico "
+          type="number"
+          placeholder="Introduce la duración en minutos"
           {...register("durationMin", {
-            required: "El correo electrónico es obligatorio",
+            required: "La duración es obligatoria",
           })}
         />
         <Field.ErrorText>{errors.durationMin?.message}</Field.ErrorText>
       </Field.Root>
 
       <Field.Root invalid={!!errors.description}>
-        <Field.Label>Introduce una descripcion del servicio</Field.Label>
+        <Field.Label>Descripción del servicio</Field.Label>
         <Input
           id="description"
-          placeholder="Introduce tu correo electrónico "
+          placeholder="Describe los detalles del servicio"
           {...register("description", {
-            required: "El correo electrónico es obligatorio",
+            required: "La descripción es obligatoria",
           })}
         />
         <Field.ErrorText>{errors.description?.message}</Field.ErrorText>
       </Field.Root>
-
-      <Controller
-        control={control}
-        name="isActive"
-        render={({ field }) => (
-          <Field.Root invalid={!!errors.isActive}>
-            <Field.Label>Categoría del servicio</Field.Label>
-            <SegmentGroup.Root
-              size="sm"
-              onBlur={field.onBlur}
-              name={field.name}
-              //value={field.value}
-              onValueChange={({ value }) => field.onChange(value)}
-            >
-              <SegmentGroup.Items items={availabilityOptions} />
-              <SegmentGroup.Indicator />
-            </SegmentGroup.Root>
-            <Field.ErrorText>{errors.isActive?.message}</Field.ErrorText>
-          </Field.Root>
-        )}
-      />
     </Stack>
   );
 }
