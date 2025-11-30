@@ -88,6 +88,10 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const profile = useAuthStore((state) => state.profile);
 
+  const handleNavItemClick = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Box
       as="aside"
@@ -149,6 +153,7 @@ export default function Sidebar() {
                   icon={link.icon}
                   path={link.path}
                   name={link.name}
+                  onNavigate={handleNavItemClick}
                 />
               ))}
             </Flex>
@@ -196,9 +201,10 @@ interface NavItemProps extends FlexProps {
   icon: IconType;
   name: string;
   path: string;
+  onNavigate?: () => void;
 }
 
-const NavItem = ({ icon, name, path, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, name, path, onNavigate, ...rest }: NavItemProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isActive = location.pathname === path;
@@ -221,6 +227,9 @@ const NavItem = ({ icon, name, path, ...rest }: NavItemProps) => {
 
   const handleClick = () => {
     navigate(path);
+    if (onNavigate) {
+      onNavigate();
+    }
   };
 
   return (
