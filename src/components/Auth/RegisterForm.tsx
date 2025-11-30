@@ -8,6 +8,7 @@ import {
   type UseFormRegister,
 } from "react-hook-form";
 import type { RegisterFormData } from "@/types";
+import { createListCollection } from "@chakra-ui/react";
 
 type RegisterFormProps = {
   register: UseFormRegister<RegisterFormData>;
@@ -24,6 +25,14 @@ export default function RegisterForm({
     { label: "Cliente", value: "CLIENT" },
     { label: "Profesional", value: "PROFESSIONAL" },
   ];
+
+  const GENDER_ITEMS = createListCollection({
+    items: [
+      { label: "Masculino", value: "Masculino" },
+      { label: "Femenino", value: "Femenino" },
+      { label: "Otro", value: "Otro" },
+    ],
+  });
 
   const role = useWatch({ control, name: "role" });
 
@@ -77,7 +86,7 @@ export default function RegisterForm({
           {...register("email", {
             required: "El correo electrónico es obligatorio",
             pattern: {
-              value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              value: /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
               message: "El formato del correo electrónico no es válido",
             },
           })}
@@ -135,13 +144,28 @@ export default function RegisterForm({
           </Field.Root>
 
           <Field.Root invalid={!!errors.gender}>
-            <Field.Label>Genero</Field.Label>
-            <Input
-              id="gender"
-              placeholder="Especifica tu genero "
-              {...register("gender", {
-                required: "La especialidad es obligatoria",
-              })}
+            <Field.Label>Género</Field.Label>
+            <Controller
+              control={control}
+              name="gender"
+              rules={{ required: "El género es obligatorio" }}
+              render={({ field }) => (
+                <SegmentGroup.Root
+                  size="sm"
+                  value={field.value || ""}
+                  onValueChange={({ value }) => field.onChange(value)}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                >
+                  {GENDER_ITEMS.items.map((item) => (
+                    <SegmentGroup.Item key={item.value} value={item.value}>
+                      <SegmentGroup.ItemText>{item.label}</SegmentGroup.ItemText>
+                      <SegmentGroup.ItemHiddenInput />
+                    </SegmentGroup.Item>
+                  ))}
+                  <SegmentGroup.Indicator />
+                </SegmentGroup.Root>
+              )}
             />
             <Field.ErrorText>{errors.gender?.message}</Field.ErrorText>
           </Field.Root>
