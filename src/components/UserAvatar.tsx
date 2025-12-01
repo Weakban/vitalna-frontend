@@ -75,7 +75,7 @@ export default function UserAvatar() {
             size="lg"
             colorPalette={getAvatarColorPalette()}
           >
-            <Avatar.Fallback name={profile.name} />
+            <Avatar.Fallback data-testid="user-avatar" name={profile.name} />
           </Avatar.Root>
 
           <VStack flex="1" align="flex-start" gap={1} minW={0}>

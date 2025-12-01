@@ -11,7 +11,7 @@ describe("Login Process", () => {
     const submitButton = cy.get('button[type="submit"]');
 
     // 3. Escribir las credenciales (usa un usuario de prueba válido)
-    emailInput.type("elena.rios@nutricion.com"); // Reemplaza con un email de prueba
+    emailInput.type("weakban+psico@gmail.com"); // Reemplaza con un email de prueba
     passwordInput.type("12345678"); // Reemplaza con la contraseña de prueba
 
     // 4. Hacer clic en el botón de submit
