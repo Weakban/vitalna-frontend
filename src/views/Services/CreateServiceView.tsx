@@ -104,7 +104,7 @@ export default function CreateServiceView() {
                 color="white"
                 _hover={{ bg: "brand.Cmint" }}
               >
-                <a href="/services">Cancelar</a>
+                <a href="/app/professional/myServices">Cancelar</a>
               </Button>
 
               <Button

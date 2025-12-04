@@ -297,7 +297,7 @@ export default function AppointmentDetails({
             ) : (
               // Vista para cliente
               <>
-                {appointment.status === "COMPLETED" && (
+                {/*appointment.status === "COMPLETED" && (
                   <Button
                     bg="brand.Cblue"
                     color="white"
@@ -306,7 +306,7 @@ export default function AppointmentDetails({
                   >
                     Calificar
                   </Button>
-                )}
+                )*/}
 
                 {appointment.status === "RESERVED" && (
                   <>
